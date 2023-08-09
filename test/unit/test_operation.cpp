@@ -484,6 +484,7 @@ TEST(operation, concatenated_operation) {
                     "    STEP[" +
                     step2_wkt +
                     "],\n"
+                    "    OPERATIONACCURACY[0.1],\n"
                     "    ID[\"codeSpace\",\"code\"],\n"
                     "    REMARK[\"my remarks\"]]";
 
@@ -1455,7 +1456,7 @@ TEST(operation, tped_export) {
 // ---------------------------------------------------------------------------
 
 TEST(operation, tmg_export) {
-    auto conv = Conversion::createTunisiaMappingGrid(
+    auto conv = Conversion::createTunisiaMiningGrid(
         PropertyMap(), Angle(1), Angle(2), Length(3), Length(4));
     EXPECT_TRUE(conv->validateParameters().empty());
 
@@ -1463,8 +1464,8 @@ TEST(operation, tmg_export) {
                  FormattingException);
 
     EXPECT_EQ(conv->exportToWKT(WKTFormatter::create().get()),
-              "CONVERSION[\"Tunisia Mapping Grid\",\n"
-              "    METHOD[\"Tunisia Mapping Grid\",\n"
+              "CONVERSION[\"Tunisia Mining Grid\",\n"
+              "    METHOD[\"Tunisia Mining Grid\",\n"
               "        ID[\"EPSG\",9816]],\n"
               "    PARAMETER[\"Latitude of false origin\",1,\n"
               "        ANGLEUNIT[\"degree\",0.0174532925199433],\n"
@@ -1482,7 +1483,7 @@ TEST(operation, tmg_export) {
     EXPECT_EQ(
         conv->exportToWKT(
             WKTFormatter::create(WKTFormatter::Convention::WKT1_GDAL).get()),
-        "PROJECTION[\"Tunisia_Mapping_Grid\"],\n"
+        "PROJECTION[\"Tunisia_Mining_Grid\"],\n"
         "PARAMETER[\"latitude_of_origin\",1],\n"
         "PARAMETER[\"central_meridian\",2],\n"
         "PARAMETER[\"false_easting\",3],\n"
@@ -1669,7 +1670,7 @@ TEST(operation, lambert_cylindrical_equal_area_spherical_export) {
     EXPECT_TRUE(conv->validateParameters().empty());
 
     EXPECT_EQ(conv->exportToPROJString(PROJStringFormatter::create().get()),
-              "+proj=cea +lat_ts=1 +lon_0=2 +x_0=3 +y_0=4");
+              "+proj=cea +R_A +lat_ts=1 +lon_0=2 +x_0=3 +y_0=4");
 
     EXPECT_EQ(conv->exportToWKT(WKTFormatter::create().get()),
               "CONVERSION[\"Lambert Cylindrical Equal Area (Spherical)\",\n"
@@ -1774,6 +1775,41 @@ TEST(operation, lcc1sp_export) {
         "PARAMETER[\"scale_factor\",3],\n"
         "PARAMETER[\"false_easting\",4],\n"
         "PARAMETER[\"false_northing\",5]");
+}
+
+// ---------------------------------------------------------------------------
+
+TEST(operation, lcc1sp_variant_b_export) {
+    auto conv = Conversion::createLambertConicConformal_1SP_VariantB(
+        PropertyMap(), Angle(1), Scale(2), Angle(3), Angle(4), Length(5),
+        Length(6));
+    EXPECT_TRUE(conv->validateParameters().empty());
+
+    EXPECT_EQ(conv->exportToPROJString(PROJStringFormatter::create().get()),
+              "+proj=lcc +lat_1=1 +k_0=2 +lat_0=3 +lon_0=4 +x_0=5 +y_0=6");
+
+    EXPECT_EQ(conv->exportToWKT(WKTFormatter::create().get()),
+              "CONVERSION[\"Lambert Conic Conformal (1SP variant B)\",\n"
+              "    METHOD[\"Lambert Conic Conformal (1SP variant B)\",\n"
+              "        ID[\"EPSG\",1102]],\n"
+              "    PARAMETER[\"Latitude of natural origin\",1,\n"
+              "        ANGLEUNIT[\"degree\",0.0174532925199433],\n"
+              "        ID[\"EPSG\",8801]],\n"
+              "    PARAMETER[\"Scale factor at natural origin\",2,\n"
+              "        SCALEUNIT[\"unity\",1],\n"
+              "        ID[\"EPSG\",8805]],\n"
+              "    PARAMETER[\"Latitude of false origin\",3,\n"
+              "        ANGLEUNIT[\"degree\",0.0174532925199433],\n"
+              "        ID[\"EPSG\",8821]],\n"
+              "    PARAMETER[\"Longitude of false origin\",4,\n"
+              "        ANGLEUNIT[\"degree\",0.0174532925199433],\n"
+              "        ID[\"EPSG\",8822]],\n"
+              "    PARAMETER[\"Easting at false origin\",5,\n"
+              "        LENGTHUNIT[\"metre\",1],\n"
+              "        ID[\"EPSG\",8826]],\n"
+              "    PARAMETER[\"Northing at false origin\",6,\n"
+              "        LENGTHUNIT[\"metre\",1],\n"
+              "        ID[\"EPSG\",8827]]]");
 }
 
 // ---------------------------------------------------------------------------
@@ -2023,26 +2059,20 @@ TEST(operation, eckert_export) {
 
     for (int i = 1; i <= 6; i++) {
         auto conv =
-            (i == 1)
-                ? Conversion::createEckertI(PropertyMap(), Angle(1), Length(2),
-                                            Length(3))
-                : (i == 2)
-                      ? Conversion::createEckertII(PropertyMap(), Angle(1),
+            (i == 1)   ? Conversion::createEckertI(PropertyMap(), Angle(1),
                                                    Length(2), Length(3))
-                      : (i == 3)
-                            ? Conversion::createEckertIII(
-                                  PropertyMap(), Angle(1), Length(2), Length(3))
-                            : (i == 4) ? Conversion::createEckertIV(
-                                             PropertyMap(), Angle(1), Length(2),
-                                             Length(3))
-                                       : (i == 5) ? Conversion::createEckertV(
-                                                        PropertyMap(), Angle(1),
-                                                        Length(2), Length(3))
-                                                  :
+            : (i == 2) ? Conversion::createEckertII(PropertyMap(), Angle(1),
+                                                    Length(2), Length(3))
+            : (i == 3) ? Conversion::createEckertIII(PropertyMap(), Angle(1),
+                                                     Length(2), Length(3))
+            : (i == 4) ? Conversion::createEckertIV(PropertyMap(), Angle(1),
+                                                    Length(2), Length(3))
+            : (i == 5) ? Conversion::createEckertV(PropertyMap(), Angle(1),
+                                                   Length(2), Length(3))
+                       :
 
-                                                  Conversion::createEckertVI(
-                                                      PropertyMap(), Angle(1),
-                                                      Length(2), Length(3));
+                       Conversion::createEckertVI(PropertyMap(), Angle(1),
+                                                  Length(2), Length(3));
 
         EXPECT_TRUE(conv->validateParameters().empty());
 
@@ -3885,28 +3915,22 @@ TEST(operation, wagner_export) {
         if (i == 3)
             continue;
         auto conv =
-            (i == 1)
-                ? Conversion::createWagnerI(PropertyMap(), Angle(1), Length(2),
-                                            Length(3))
-                : (i == 2)
-                      ? Conversion::createWagnerII(PropertyMap(), Angle(1),
+            (i == 1)   ? Conversion::createWagnerI(PropertyMap(), Angle(1),
                                                    Length(2), Length(3))
-                      : (i == 4)
-                            ? Conversion::createWagnerIV(
-                                  PropertyMap(), Angle(1), Length(2), Length(3))
-                            : (i == 5) ? Conversion::createWagnerV(
-                                             PropertyMap(), Angle(1), Length(2),
-                                             Length(3))
-                                       : (i == 6) ?
+            : (i == 2) ? Conversion::createWagnerII(PropertyMap(), Angle(1),
+                                                    Length(2), Length(3))
+            : (i == 4) ? Conversion::createWagnerIV(PropertyMap(), Angle(1),
+                                                    Length(2), Length(3))
+            : (i == 5) ? Conversion::createWagnerV(PropertyMap(), Angle(1),
+                                                   Length(2), Length(3))
+            : (i == 6) ?
 
-                                                  Conversion::createWagnerVI(
-                                                      PropertyMap(), Angle(1),
-                                                      Length(2), Length(3))
-                                                  :
+                       Conversion::createWagnerVI(PropertyMap(), Angle(1),
+                                                  Length(2), Length(3))
+                       :
 
-                                                  Conversion::createWagnerVII(
-                                                      PropertyMap(), Angle(1),
-                                                      Length(2), Length(3));
+                       Conversion::createWagnerVII(PropertyMap(), Angle(1),
+                                                   Length(2), Length(3));
         EXPECT_TRUE(conv->validateParameters().empty());
 
         EXPECT_EQ(conv->exportToPROJString(PROJStringFormatter::create().get()),

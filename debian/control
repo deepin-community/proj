@@ -4,19 +4,21 @@ Uploaders: Francesco Paolo Lovergine <frankie@debian.org>,
            Bas Couwenberg <sebastic@debian.org>
 Section: science
 Priority: optional
-Build-Depends: debhelper-compat (= 12),
+Build-Depends: cmake,
+               debhelper-compat (= 13),
                libcurl4-gnutls-dev | libcurl-ssl-dev,
+               libgtest-dev,
                libsqlite3-dev,
                libtiff-dev,
-               pkg-config,
                pkg-kde-tools,
                sharutils,
                sqlite3,
                xz-utils
-Standards-Version: 4.6.0
+Standards-Version: 4.6.2
 Vcs-Browser: https://salsa.debian.org/debian-gis-team/proj
 Vcs-Git: https://salsa.debian.org/debian-gis-team/proj.git
 Homepage: https://proj.org/
+Rules-Requires-Root: no
 
 Package: proj-data
 Architecture: all
@@ -38,7 +40,7 @@ Description: Cartographic projection filter and library (datum package)
  This package contains auxiliary projection datum grids used by the
  library and tools.
 
-Package: libproj22
+Package: libproj25
 Architecture: any
 Multi-Arch: same
 Section: libs
@@ -65,7 +67,7 @@ Package: libproj-dev
 Architecture: any
 Multi-Arch: same
 Section: libdevel
-Depends: libproj22 (= ${binary:Version}),
+Depends: libproj25 (= ${binary:Version}),
          libcurl4-gnutls-dev | libcurl-ssl-dev,
          libsqlite3-dev,
          libtiff-dev,
