@@ -360,7 +360,7 @@ TEST(gie, info_functions) {
     const PJ_ELLPS *ellps_list;
     const PJ_PRIME_MERIDIANS *pm_list;
 
-    char buf[40];
+    std::vector<char> buf(40);
     PJ *P;
     char arg[50] = {"+proj=utm; +zone=32; +ellps=GRS80"};
     PJ_COORD a;
@@ -377,11 +377,12 @@ TEST(gie, info_functions) {
 
     if (info.version[0] != '\0') {
         char tmpstr[64];
-        sprintf(tmpstr, "%d.%d.%d", info.major, info.minor, info.patch);
+        snprintf(tmpstr, sizeof(tmpstr), "%d.%d.%d", info.major, info.minor,
+                 info.patch);
         ASSERT_EQ(std::string(info.version), std::string(tmpstr));
     }
     ASSERT_NE(std::string(info.release), "");
-    if (getenv("HOME") || getenv("PROJ_LIB")) {
+    if (getenv("HOME") || getenv("PROJ_LIB") || getenv("PROJ_DATA")) {
         ASSERT_NE(std::string(info.searchpath), std::string());
     }
 
@@ -411,6 +412,14 @@ TEST(gie, info_functions) {
     ASSERT_NE(std::string(grid_info.filename), "");
     ASSERT_EQ(std::string(grid_info.gridname), "tests/test_hgrid.tif");
     ASSERT_EQ(std::string(grid_info.format), "gtiff");
+    EXPECT_EQ(grid_info.n_lon, 4);
+    EXPECT_EQ(grid_info.n_lat, 4);
+    EXPECT_NEAR(grid_info.cs_lon, 0.017453292519943295, 1e-15);
+    EXPECT_NEAR(grid_info.cs_lat, 0.017453292519943295, 1e-15);
+    EXPECT_NEAR(grid_info.lowerleft.lam, 0.069813170079773182, 1e-15);
+    EXPECT_NEAR(grid_info.lowerleft.phi, 0.90757121103705141, 1e-15);
+    EXPECT_NEAR(grid_info.upperright.lam, 0.12217304763960307, 1e-15);
+    EXPECT_NEAR(grid_info.upperright.phi, 0.95993108859688125, 1e-15);
 
     grid_info = proj_grid_info("nonexistinggrid");
     ASSERT_EQ(std::string(grid_info.filename), "");
@@ -432,12 +441,35 @@ TEST(gie, info_functions) {
     ASSERT_EQ(std::string(init_info.name), "epsg");
 
     /* test proj_rtodms() and proj_dmstor() */
-    ASSERT_EQ(std::string("180dN"), proj_rtodms(buf, M_PI, 'N', 'S'));
+    ASSERT_EQ(std::string("180dN"),
+              proj_rtodms2(&buf[0], buf.size(), M_PI, 'N', 'S'));
 
     ASSERT_EQ(proj_dmstor(&buf[0], NULL), M_PI);
 
     ASSERT_EQ(std::string("114d35'29.612\"S"),
-              proj_rtodms(buf, -2.0, 'N', 'S'));
+              proj_rtodms2(&buf[0], buf.size(), -2.0, 'N', 'S'));
+
+    // buffer of just one byte
+    ASSERT_EQ(std::string(""), proj_rtodms2(&buf[0], 1, -2.0, 'N', 'S'));
+
+    // last character truncated
+    ASSERT_EQ(std::string("114d35'29.612\""),
+              proj_rtodms2(&buf[0], 15, -2.0, 'N', 'S'));
+
+    // just enough bytes to store the string and the terminating nul character
+    ASSERT_EQ(std::string("114d35'29.612\"S"),
+              proj_rtodms2(&buf[0], 16, -2.0, 'N', 'S'));
+
+    // buffer of just one byte
+    ASSERT_EQ(std::string(""), proj_rtodms2(&buf[0], 1, -2.0, 0, 0));
+
+    // last character truncated
+    ASSERT_EQ(std::string("-114d35'29.612"),
+              proj_rtodms2(&buf[0], 15, -2.0, 0, 0));
+
+    // just enough bytes to store the string and the terminating nul character
+    ASSERT_EQ(std::string("-114d35'29.612\""),
+              proj_rtodms2(&buf[0], 16, -2.0, 0, 0));
 
     /* we can't expect perfect numerical accuracy so testing with a tolerance */
     ASSERT_NEAR(-2.0, proj_dmstor(&buf[0], NULL), 1e-7);
@@ -618,7 +650,6 @@ static void test_time(const char *args, double tol, double t_in, double t_exp) {
 // ---------------------------------------------------------------------------
 
 TEST(gie, unitconvert_selftest) {
-
     char args1[] = "+proj=unitconvert +t_in=decimalyear +t_out=decimalyear";
     double in1 = 2004.25;
 
@@ -639,6 +670,36 @@ TEST(gie, unitconvert_selftest) {
     test_time(args3, 1e-6, in3, in3);
     test_time(args4, 1e-6, in4, exp4);
     test_time(args5, 1e-6, in5, in5);
+}
+
+static void test_date(const char *args, double tol, double t_in, double t_exp) {
+    PJ_COORD in, out;
+    PJ *P = proj_create(PJ_DEFAULT_CTX, args);
+
+    ASSERT_TRUE(P != 0);
+
+    in = proj_coord(0.0, 0.0, 0.0, t_in);
+
+    out = proj_trans(P, PJ_FWD, in);
+    EXPECT_NEAR(out.xyzt.t, t_exp, tol);
+
+    proj_destroy(P);
+
+    proj_log_level(NULL, PJ_LOG_NONE);
+}
+
+TEST(gie, unitconvert_selftest_date) {
+    char args[] = "+proj=unitconvert +t_in=decimalyear +t_out=yyyymmdd";
+    test_date(args, 1e-6, 2022.0027, 20220102);
+    test_date(args, 1e-6, 1990.0, 19900101);
+    test_date(args, 1e-6, 2004.1612, 20040229);
+    test_date(args, 1e-6, 1899.999, 19000101);
+
+    strcpy(&args[18], "+t_in=yyyymmdd +t_out=decimalyear");
+    test_date(args, 1e-6, 20220102, 2022.0027397);
+    test_date(args, 1e-6, 19900101, 1990.0);
+    test_date(args, 1e-6, 20040229, 2004.1612022);
+    test_date(args, 1e-6, 18991231, 1899.9972603);
 }
 
 static const char tc32_utm32[] = {
@@ -734,6 +795,120 @@ TEST(gie, horner_selftest) {
     proj_destroy(P);
 }
 
+static const char tc32_utm32_fwd_only[] = {
+    " +proj=horner"
+    " +ellps=intl"
+    " +range=10000000"
+    " +fwd_origin=877605.269066,6125810.306769"
+    " +deg=4"
+    " +fwd_v=6.1258112678e+06,9.9999971567e-01,1.5372750011e-10,5.9300860915e-"
+    "15,2.2609497633e-19,4.3188227445e-05,2.8225130416e-10,7.8740007114e-16,-1."
+    "7453997279e-19,1.6877465415e-10,-1.1234649773e-14,-1.7042333358e-18,-7."
+    "9303467953e-15,-5.2906832535e-19,3.9984284847e-19"
+    " +fwd_u=8.7760574982e+05,9.9999752475e-01,2.8817299305e-10,5.5641310680e-"
+    "15,-1.5544700949e-18,-4.1357045890e-05,4.2106213519e-11,2.8525551629e-14,-"
+    "1.9107771273e-18,3.3615590093e-10,2.4380247154e-14,-2.0241230315e-18,1."
+    "2429019719e-15,5.3886155968e-19,-1.0167505000e-18"};
+
+static const char sb_utm32_fwd_only[] = {
+    " +proj=horner"
+    " +ellps=intl"
+    " +range=10000000"
+    " +fwd_origin=4.94690026817276e+05,6.13342113183056e+06"
+    " +deg=3"
+    " +fwd_c=6.13258562111350e+06,6.19480105709997e+05,9.99378966275206e-01,-2."
+    "82153291753490e-02,-2.27089979140026e-10,-1.77019590701470e-09,1."
+    "08522286274070e-14,2.11430298751604e-15"};
+
+static const char hatt_to_ggrs[] = {
+    " +proj=horner"
+    " +ellps=bessel"
+    " +fwd_origin=0.0, 0.0"
+    " +deg=2"
+    " +range=10000000"
+    " +fwd_u=370552.68, 0.9997155, -1.08e-09, 0.0175123, 2.04e-09, 1.63e-09"
+    " +fwd_v=4511927.23, 0.9996979, 5.60e-10, -0.0174755, -1.65e-09, "
+    "-6.50e-10"};
+
+TEST(gie, horner_only_fwd_selftest) {
+
+    {
+        PJ *P = proj_create(PJ_DEFAULT_CTX, tc32_utm32_fwd_only);
+        ASSERT_TRUE(P != nullptr);
+
+        PJ_COORD a = proj_coord(0, 0, 0, 0);
+        a.uv.v = 6125305.4245;
+        a.uv.u = 878354.8539;
+
+        /* Check roundtrip precision for 1 iteration each way, starting in
+         * forward direction */
+        double dist = proj_roundtrip(P, PJ_FWD, 1, &a);
+        EXPECT_LE(dist, 0.01);
+
+        proj_destroy(P);
+    }
+
+    {
+        PJ_COORD a;
+        a = proj_coord(0, 0, 0, 0);
+        a.xy.x = -10157.950;
+        a.xy.y = -21121.093;
+        PJ_COORD c;
+        c = proj_coord(0, 0, 0, 0);
+        c.enu.e = 360028.794;
+        c.enu.n = 4490989.862;
+
+        PJ *P = proj_create(PJ_DEFAULT_CTX, hatt_to_ggrs);
+        ASSERT_TRUE(P != nullptr);
+
+        /* Forward projection */
+        PJ_COORD b = proj_trans(P, PJ_FWD, a);
+        double dist = proj_xy_dist(b, c);
+        EXPECT_LE(dist, 0.001);
+
+        /* Inverse projection */
+        b = proj_trans(P, PJ_INV, c);
+        dist = proj_xy_dist(b, a);
+        EXPECT_LE(dist, 0.001);
+
+        /* Check roundtrip precision for 1 iteration each way, starting in
+         * forward direction */
+        dist = proj_roundtrip(P, PJ_FWD, 1, &a);
+        EXPECT_LE(dist, 0.01);
+
+        proj_destroy(P);
+    }
+
+    {
+        PJ *P = proj_create(PJ_DEFAULT_CTX, sb_utm32_fwd_only);
+        ASSERT_TRUE(P != nullptr);
+
+        PJ_COORD a = proj_coord(0, 0, 0, 0);
+        PJ_COORD b = proj_coord(0, 0, 0, 0);
+        PJ_COORD c = proj_coord(0, 0, 0, 0);
+        a.uv.v = 6130821.2945;
+        a.uv.u = 495136.8544;
+        c.uv.v = 6130000.0000;
+        c.uv.u = 620000.0000;
+
+        /* Forward projection */
+        b = proj_trans(P, PJ_FWD, a);
+        double dist = proj_xy_dist(b, c);
+        EXPECT_LE(dist, 0.001);
+
+        /* Inverse projection */
+        b = proj_trans(P, PJ_INV, c);
+        dist = proj_xy_dist(b, a);
+        EXPECT_LE(dist, 0.001);
+
+        /* Check roundtrip precision for 1 iteration each way */
+        dist = proj_roundtrip(P, PJ_FWD, 1, &a);
+        EXPECT_LE(dist, 0.01);
+
+        proj_destroy(P);
+    }
+}
+
 // ---------------------------------------------------------------------------
 
 TEST(gie, proj_create_crs_to_crs_PULKOVO42_ETRS89) {
@@ -818,6 +993,21 @@ TEST(gie, proj_create_crs_to_crs_PULKOVO42_ETRS89) {
 
 // ---------------------------------------------------------------------------
 
+TEST(gie, proj_create_crs_to_crs_WGS84_EGM08_to_WGS84) {
+    auto P = proj_create_crs_to_crs(PJ_DEFAULT_CTX, "EPSG:4326+3855",
+                                    "EPSG:4979", nullptr);
+    ASSERT_TRUE(P != nullptr);
+
+    EXPECT_EQ(std::string(proj_pj_info(P).description),
+              "Transformation from EGM2008 height to WGS 84 (ballpark vertical "
+              "transformation, without ellipsoid height to vertical height "
+              "correction)");
+
+    proj_destroy(P);
+}
+
+// ---------------------------------------------------------------------------
+
 TEST(gie, proj_create_crs_to_crs_outside_area_of_use) {
 
     // See https://github.com/OSGeo/proj.4/issues/1329
@@ -866,6 +1056,71 @@ TEST(gie, proj_create_crs_to_crs_with_area_large) {
 
 // ---------------------------------------------------------------------------
 
+TEST(gie, proj_create_crs_to_crs_with_longitude_outside_minus_180_180) {
+
+    // Test bugfix for https://github.com/OSGeo/PROJ/issues/3594
+    auto P = proj_create_crs_to_crs(PJ_DEFAULT_CTX, "EPSG:4277", "EPSG:4326",
+                                    nullptr);
+    ASSERT_TRUE(P != nullptr);
+    PJ_COORD c;
+
+    c.xyzt.x = 50;       // Lat in deg
+    c.xyzt.y = -2 + 360; // Long in deg
+    c.xyzt.z = 0;
+    c.xyzt.t = HUGE_VAL;
+    c = proj_trans(P, PJ_FWD, c);
+    EXPECT_NEAR(c.xy.x, 50.00065628, 1e-8);
+    EXPECT_NEAR(c.xy.y, -2.00133989, 1e-8);
+
+    c.xyzt.x = 50;       // Lat in deg
+    c.xyzt.y = -2 - 360; // Long in deg
+    c.xyzt.z = 0;
+    c.xyzt.t = HUGE_VAL;
+    c = proj_trans(P, PJ_FWD, c);
+    EXPECT_NEAR(c.xy.x, 50.00065628, 1e-8);
+    EXPECT_NEAR(c.xy.y, -2.00133989, 1e-8);
+
+    c.xyzt.x = 50.00065628;       // Lat in deg
+    c.xyzt.y = -2.00133989 + 360; // Long in deg
+    c.xyzt.z = 0;
+    c.xyzt.t = HUGE_VAL;
+    c = proj_trans(P, PJ_INV, c);
+    EXPECT_NEAR(c.xy.x, 50, 1e-8);
+    EXPECT_NEAR(c.xy.y, -2, 1e-8);
+
+    c.xyzt.x = 50.00065628;       // Lat in deg
+    c.xyzt.y = -2.00133989 - 360; // Long in deg
+    c.xyzt.z = 0;
+    c.xyzt.t = HUGE_VAL;
+    c = proj_trans(P, PJ_INV, c);
+    EXPECT_NEAR(c.xy.x, 50, 1e-8);
+    EXPECT_NEAR(c.xy.y, -2, 1e-8);
+
+    auto Pnormalized = proj_normalize_for_visualization(PJ_DEFAULT_CTX, P);
+
+    c.xyzt.x = -2 + 360; // Long in deg
+    c.xyzt.y = 50;       // Lat in deg
+    c.xyzt.z = 0;
+    c.xyzt.t = HUGE_VAL;
+    c = proj_trans(Pnormalized, PJ_FWD, c);
+    EXPECT_NEAR(c.xy.x, -2.00133989, 1e-8);
+    EXPECT_NEAR(c.xy.y, 50.00065628, 1e-8);
+
+    c.xyzt.x = -2.00133989 + 360; // Long in deg
+    c.xyzt.y = 50.00065628;       // Lat in deg
+    c.xyzt.z = 0;
+    c.xyzt.t = HUGE_VAL;
+    c = proj_trans(Pnormalized, PJ_INV, c);
+    EXPECT_NEAR(c.xy.x, -2, 1e-8);
+    EXPECT_NEAR(c.xy.y, 50, 1e-8);
+
+    proj_destroy(Pnormalized);
+
+    proj_destroy(P);
+}
+
+// ---------------------------------------------------------------------------
+
 TEST(gie, proj_trans_generic) {
     // GDA2020 to WGS84 (G1762)
     auto P = proj_create(
@@ -880,14 +1135,266 @@ TEST(gie, proj_trans_generic) {
         "+step +proj=unitconvert +xy_in=rad +xy_out=deg "
         "+step +proj=axisswap +order=2,1");
     double lat = -60;
-    double lon = 120;
-    proj_trans_generic(P, PJ_FWD, &lat, sizeof(double), 1, &lon, sizeof(double),
-                       1, nullptr, 0, 0, nullptr, 0, 0);
+    double longitude = 120;
+    proj_trans_generic(P, PJ_FWD, &lat, sizeof(double), 1, &longitude,
+                       sizeof(double), 1, nullptr, 0, 0, nullptr, 0, 0);
     // Should be a no-op when the time is unknown (or equal to 2020)
     EXPECT_NEAR(lat, -60, 1e-9);
-    EXPECT_NEAR(lon, 120, 1e-9);
+    EXPECT_NEAR(longitude, 120, 1e-9);
 
     proj_destroy(P);
+}
+
+// ---------------------------------------------------------------------------
+
+TEST(gie, proj_trans_with_a_crs) {
+    auto P = proj_create(PJ_DEFAULT_CTX, "EPSG:4326");
+    PJ_COORD input;
+    input.xyzt.x = 0;
+    input.xyzt.y = 0;
+    input.xyzt.z = 0;
+    input.xyzt.t = 0;
+    auto output = proj_trans(P, PJ_FWD, input);
+    EXPECT_EQ(proj_errno(P), PROJ_ERR_INVALID_OP_ILLEGAL_ARG_VALUE);
+    proj_destroy(P);
+    EXPECT_EQ(HUGE_VAL, output.xyzt.x);
+}
+
+// ---------------------------------------------------------------------------
+
+TEST(gie, proj_create_crs_to_crs_from_pj_force_over) {
+
+    PJ_CONTEXT *ctx;
+
+    ctx = proj_context_create();
+    ASSERT_TRUE(ctx != nullptr);
+
+    auto epsg27700 = proj_create(ctx, "EPSG:27700");
+    ASSERT_TRUE(epsg27700 != nullptr);
+
+    auto epsg4326 = proj_create(ctx, "EPSG:4326");
+    ASSERT_TRUE(epsg4326 != nullptr);
+
+    auto epsg3857 = proj_create(ctx, "EPSG:3857");
+    ASSERT_TRUE(epsg3857 != nullptr);
+
+    {
+        const char *const options[] = {"FORCE_OVER=YES", nullptr};
+        auto P = proj_create_crs_to_crs_from_pj(ctx, epsg4326, epsg3857,
+                                                nullptr, options);
+        ASSERT_TRUE(P != nullptr);
+        ASSERT_TRUE(P->over);
+        PJ_COORD input;
+        PJ_COORD input_over;
+
+        // Test a point along the equator.
+        // The same point, but in two different representations.
+        input.xyzt.x = 0;   // Lat in deg
+        input.xyzt.y = 140; // Long in deg
+        input.xyzt.z = 0;
+        input.xyzt.t = HUGE_VAL;
+
+        input_over.xyzt.x = 0;    // Lat in deg
+        input_over.xyzt.y = -220; // Long in deg
+        input_over.xyzt.z = 0;
+        input_over.xyzt.t = HUGE_VAL;
+
+        auto output = proj_trans(P, PJ_FWD, input);
+        auto output_over = proj_trans(P, PJ_FWD, input_over);
+
+        auto input_inv = proj_trans(P, PJ_INV, output);
+        auto input_over_inv = proj_trans(P, PJ_INV, output_over);
+
+        // Web Mercator x's between 0 and 180 longitude come out positive.
+        // But when forcing the over flag, the -220 calculation makes it flip.
+        EXPECT_GT(output.xyz.x, 0);
+        EXPECT_LT(output_over.xyz.x, 0);
+
+        EXPECT_NEAR(output.xyz.x, 15584728.711058298, 1e-8);
+        EXPECT_NEAR(output_over.xyz.x, -24490287.974520184, 1e-8);
+
+        // The distance from 140 to 180 and -220 to -180 should be pretty much
+        // the same.
+        auto dx_o = fabs(output.xyz.x - 20037508.342789244);
+        auto dx_over = fabs(output_over.xyz.x + 20037508.342789244);
+        auto dx = fabs(dx_o - dx_over);
+
+        EXPECT_NEAR(dx, 0, 1e-8);
+
+        // Check the inverse operations get us back close to our original input
+        // values.
+        EXPECT_NEAR(input.xyz.x, input_inv.xyz.x, 1e-8);
+        EXPECT_NEAR(input.xyz.y, input_inv.xyz.y, 1e-8);
+        EXPECT_NEAR(input_over.xyz.x, input_over_inv.xyz.x, 1e-8);
+        EXPECT_NEAR(input_over.xyz.y, input_over_inv.xyz.y, 1e-8);
+
+        auto Pnormalized = proj_normalize_for_visualization(ctx, P);
+        ASSERT_TRUE(Pnormalized->over);
+
+        PJ_COORD input_over_normalized;
+        input_over_normalized.xyzt.x = -220; // Long in deg
+        input_over_normalized.xyzt.y = 0;    // Lat in deg
+        input_over_normalized.xyzt.z = 0;
+        input_over_normalized.xyzt.t = HUGE_VAL;
+        auto output_over_normalized =
+            proj_trans(Pnormalized, PJ_FWD, input_over_normalized);
+        EXPECT_NEAR(output_over_normalized.xyz.x, -24490287.974520184, 1e-8);
+
+        proj_destroy(Pnormalized);
+
+        proj_destroy(P);
+    }
+
+    {
+        // Try again with force over set to anything but YES to verify it didn't
+        // do anything.
+        const char *const options[] = {"FORCE_OVER=NO", nullptr};
+        auto P = proj_create_crs_to_crs_from_pj(ctx, epsg4326, epsg3857,
+                                                nullptr, options);
+        ASSERT_TRUE(P != nullptr);
+        ASSERT_FALSE(P->over);
+        PJ_COORD input;
+        PJ_COORD input_notOver;
+
+        input.xyzt.x = 0;   // Lat in deg
+        input.xyzt.y = 140; // Long in deg
+        input.xyzt.z = 0;
+        input.xyzt.t = HUGE_VAL;
+
+        input_notOver.xyzt.x = 0;    // Lat in deg
+        input_notOver.xyzt.y = -220; // Long in deg
+        input_notOver.xyzt.z = 0;
+        input_notOver.xyzt.t = HUGE_VAL;
+
+        auto output = proj_trans(P, PJ_FWD, input);
+        auto output_notOver = proj_trans(P, PJ_FWD, input_notOver);
+
+        EXPECT_GT(output.xyz.x, 0);
+        EXPECT_GT(output_notOver.xyz.x, 0);
+
+        EXPECT_NEAR(output.xyz.x, 15584728.711058298, 1e-8);
+        EXPECT_NEAR(output_notOver.xyz.x, 15584728.711058298, 1e-8);
+
+        proj_destroy(P);
+    }
+
+    {
+        // Try again with no options to verify it didn't do anything.
+        auto P = proj_create_crs_to_crs_from_pj(ctx, epsg4326, epsg3857,
+                                                nullptr, nullptr);
+        ASSERT_TRUE(P != nullptr);
+        ASSERT_FALSE(P->over);
+        PJ_COORD input;
+        PJ_COORD input_notOver;
+
+        input.xyzt.x = 0;   // Lat in deg
+        input.xyzt.y = 140; // Long in deg
+        input.xyzt.z = 0;
+        input.xyzt.t = HUGE_VAL;
+
+        input_notOver.xyzt.x = 0;    // Lat in deg
+        input_notOver.xyzt.y = -220; // Long in deg
+        input_notOver.xyzt.z = 0;
+        input_notOver.xyzt.t = HUGE_VAL;
+
+        auto output = proj_trans(P, PJ_FWD, input);
+        auto output_notOver = proj_trans(P, PJ_FWD, input_notOver);
+
+        EXPECT_GT(output.xyz.x, 0);
+        EXPECT_GT(output_notOver.xyz.x, 0);
+
+        EXPECT_NEAR(output.xyz.x, 15584728.711058298, 1e-8);
+        EXPECT_NEAR(output_notOver.xyz.x, 15584728.711058298, 1e-8);
+
+        proj_destroy(P);
+    }
+
+    {
+        // EPSG:4326 -> EPSG:27700 has more than one coordinate operation
+        // candidate.
+        const char *const options[] = {"FORCE_OVER=YES", nullptr};
+        auto P = proj_create_crs_to_crs_from_pj(ctx, epsg4326, epsg27700,
+                                                nullptr, options);
+        ASSERT_TRUE(P != nullptr);
+        ASSERT_TRUE(P->over);
+        PJ_COORD input;
+        PJ_COORD input_over;
+
+        input.xyzt.x = 0;   // Lat in deg
+        input.xyzt.y = 140; // Long in deg
+        input.xyzt.z = 0;
+        input.xyzt.t = HUGE_VAL;
+
+        input_over.xyzt.x = 0;    // Lat in deg
+        input_over.xyzt.y = -220; // Long in deg
+        input_over.xyzt.z = 0;
+        input_over.xyzt.t = HUGE_VAL;
+
+        auto output = proj_trans(P, PJ_FWD, input);
+        auto output_over = proj_trans(P, PJ_FWD, input_over);
+
+        // Doesn't actually change the result for this tmerc transformation.
+        EXPECT_NEAR(output.xyz.x, 4980122.749364435, 1e-8);
+        EXPECT_NEAR(output.xyz.y, 14467212.882603768, 1e-8);
+        EXPECT_NEAR(output_over.xyz.x, 4980122.749364435, 1e-8);
+        EXPECT_NEAR(output_over.xyz.y, 14467212.882603768, 1e-8);
+
+        auto Pnormalized = proj_normalize_for_visualization(ctx, P);
+        ASSERT_TRUE(Pnormalized->over);
+        for (const auto &op : Pnormalized->alternativeCoordinateOperations) {
+            ASSERT_TRUE(op.pj->over);
+        }
+
+        PJ_COORD input_over_normalized;
+        input_over_normalized.xyzt.x = -220; // Long in deg
+        input_over_normalized.xyzt.y = 0;    // Lat in deg
+        input_over_normalized.xyzt.z = 0;
+        input_over_normalized.xyzt.t = HUGE_VAL;
+        auto output_over_normalized =
+            proj_trans(Pnormalized, PJ_FWD, input_over_normalized);
+        EXPECT_NEAR(output_over_normalized.xyz.x, 4980122.749364435, 1e-8);
+        EXPECT_NEAR(output_over_normalized.xyz.y, 14467212.882603768, 1e-8);
+
+        proj_destroy(Pnormalized);
+
+        proj_destroy(P);
+    }
+
+    {
+        // Negative test for 27700.
+        const char *const options[] = {"FORCE_OVER=NO", nullptr};
+        auto P = proj_create_crs_to_crs_from_pj(ctx, epsg4326, epsg27700,
+                                                nullptr, options);
+        ASSERT_TRUE(P != nullptr);
+        ASSERT_FALSE(P->over);
+        PJ_COORD input;
+        PJ_COORD input_over;
+
+        input.xyzt.x = 0;   // Lat in deg
+        input.xyzt.y = 140; // Long in deg
+        input.xyzt.z = 0;
+        input.xyzt.t = HUGE_VAL;
+
+        input_over.xyzt.x = 0;    // Lat in deg
+        input_over.xyzt.y = -220; // Long in deg
+        input_over.xyzt.z = 0;
+        input_over.xyzt.t = HUGE_VAL;
+
+        auto output = proj_trans(P, PJ_FWD, input);
+        auto output_over = proj_trans(P, PJ_FWD, input_over);
+
+        EXPECT_NEAR(output.xyz.x, 4980122.749364435, 1e-8);
+        EXPECT_NEAR(output.xyz.y, 14467212.882603768, 1e-8);
+        EXPECT_NEAR(output_over.xyz.x, 4980122.749364435, 1e-8);
+        EXPECT_NEAR(output_over.xyz.y, 14467212.882603768, 1e-8);
+
+        proj_destroy(P);
+    }
+
+    proj_destroy(epsg27700);
+    proj_destroy(epsg4326);
+    proj_destroy(epsg3857);
+    proj_context_destroy(ctx);
 }
 
 } // namespace

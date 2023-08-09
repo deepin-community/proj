@@ -27,7 +27,7 @@ level margin: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .\" new: \\n[rst2man-indent\\n[rst2man-indent-level]]
 .in \\n[rst2man-indent\\n[rst2man-indent-level]]u
 ..
-.TH "PROJINFO" "1" "Nov 1, 2021" "8.2.0" "PROJ"
+.TH "PROJINFO" "1" "Jun 1, 2023" "9.2.1" "PROJ"
 .SH NAME
 projinfo \- Geodetic object and coordinate operation queries
 .SH SYNOPSIS
@@ -61,7 +61,7 @@ projinfo \- Geodetic object and coordinate operation queries
 .sp
 .sp
 where {object_definition} or {srs_def} is one of the possibilities accepted
-by \fBproj_create()\fP
+by \fI\%proj_create()\fP
 .INDENT 0.0
 .IP \(bu 2
 a proj\-string,
@@ -73,6 +73,8 @@ an object code (like "EPSG:4326", "urn:ogc:def:crs:EPSG::4326",
 .IP \(bu 2
 an Object name. e.g "WGS 84", "WGS 84 / UTM zone 31N". In that case as
 uniqueness is not guaranteed, heuristics are applied to determine the appropriate best match.
+.IP \(bu 2
+a CRS name and a coordinate epoch, separated with \(aq@\(aq. For example "\fI\%ITRF2014@2025.0\fP". (\fIadded in 9.2\fP)
 .IP \(bu 2
 a OGC URN combining references for compound coordinate reference systems
 (e.g "\fI\%urn:ogc:def:crs,crs:EPSG::2393,crs:EPSG::5717\fP" or custom abbreviated
@@ -98,14 +100,14 @@ file referenced by the {object_reference} must contain a valid
 .UNINDENT
 .SH DESCRIPTION
 .sp
-\fBprojinfo\fP is a program that can query information on a geodetic object,
+\fI\%projinfo\fP is a program that can query information on a geodetic object,
 coordinate reference system (CRS) or coordinate operation, when the \fB\-s\fP and \fB\-t\fP
 options are specified, and display it under different formats (PROJ string, WKT string
 or PROJJSON string).
 .sp
 It can also be used to query coordinate operations available between two CRS.
 .sp
-The program is named with some reference to the GDAL \fBgdalsrsinfo\fP that offers
+The program is named with some reference to the GDAL \fI\%gdalsrsinfo\fP utility that offers
 partly similar services.
 .sp
 The following control parameters can appear in any order:
@@ -207,7 +209,7 @@ only used for coordinate operation computation
 Specify how the area of use of coordinate operations found in the database
 are compared to the area of use specified explicitly with \fI\%\-\-area\fP or \fI\%\-\-bbox\fP,
 or derived implicitly from the area of use of the source and target CRS.
-By default, \fBprojinfo\fP will only keep coordinate operations whose are of use
+By default, \fI\%projinfo\fP will only keep coordinate operations whose are of use
 is strictly within the area of interest (\fBcontains\fP strategy).
 If using the \fBintersects\fP strategy, the spatial test is relaxed, and any
 coordinate operation whose area of use at least partly intersects the
@@ -248,12 +250,12 @@ only used for coordinate operation computation
 Specify how the presence or absence of a horizontal or vertical shift grid
 required for a coordinate operation affects the results returned when
 researching coordinate operations between 2 CRS.
-The default strategy is \fBsort\fP (if \fBPROJ_NETWORK\fP is not defined).
+The default strategy is \fBsort\fP (if \fI\%PROJ_NETWORK\fP is not defined).
 In that case, all candidate
 operations are returned, but the actual availability of the grids is used
 to determine the sorting order. That is, if a coordinate operation involves
 using a grid that is not available in the PROJ resource directories
-(determined by the \fBPROJ_LIB\fP environment variable, it will be listed in
+(determined by the \fI\%PROJ_DATA\fP environment variable), it will be listed in
 the bottom of the results.
 The \fBnone\fP strategy completely disables the checks of presence of grids and
 this returns the results as if all the grids where available.
@@ -261,7 +263,7 @@ The \fBdiscard_missing\fP strategy discards results that involve grids not
 present in the PROJ resource directories.
 The \fBknown_available\fP strategy discards results that involve grids not
 present in the PROJ resource directories and that are not known of the CDN.
-This is the default strategy is \fBPROJ_NETWORK\fP is set to \fBON\fP\&.
+This is the default strategy is \fI\%PROJ_NETWORK\fP is set to \fBON\fP\&.
 .sp
 \fBNOTE:\fP
 .INDENT 7.0
@@ -275,7 +277,7 @@ only used for coordinate operation computation
 .B \-\-pivot\-crs always|if_no_direct_transformation|never|{auth:code[,auth:code]*}
 Determine if intermediate (pivot) CRS can be used when researching coordinate
 operation between 2 CRS. A typical example is the WGS84 pivot. By default,
-\fBprojinfo\fP will consider any potential pivot if there is no direct transformation
+\fI\%projinfo\fP will consider any potential pivot if there is no direct transformation
 ( \fBif_no_direct_transformation\fP). If using the \fBnever\fP strategy,
 only direct transformations between the source and target CRS will be
 used. If using the \fBalways\fP strategy, intermediate CRS will be considered
@@ -313,7 +315,7 @@ New in version 7.1.
 
 .sp
 Hides any coordinate operation that is, or contains, a
-Ballpark transformation
+\fI\%Ballpark transformation\fP
 .sp
 \fBNOTE:\fP
 .INDENT 7.0
@@ -375,7 +377,7 @@ of the \fI\%\-\-output\-id\fP option will also be implicitly added.
 .INDENT 0.0
 .TP
 .B \-\-main\-db\-path path
-Specify the name and path of the database to be used by \fBprojinfo\fP\&.
+Specify the name and path of the database to be used by \fI\%projinfo\fP\&.
 The default is \fBproj.db\fP in the PROJ resource directories.
 .UNINDENT
 .INDENT 0.0
@@ -420,6 +422,9 @@ If no filter is provided all authority names and types of non deprecated CRSs ar
 list\-crs\-filter is a comma separated combination of: allow_deprecated,geodetic,geocentric,
 geographic,geographic_2d,geographic_3d,vertical,projected,compound.
 Affected by options \fI\%\-\-authority\fP, \fI\%\-\-area\fP, \fI\%\-\-bbox\fP and \fI\%\-\-spatial\-test\fP
+.sp
+A visual alternative is the webpage
+\fI\%CRS Explorer\fP .
 .UNINDENT
 .INDENT 0.0
 .TP
@@ -427,12 +432,12 @@ Affected by options \fI\%\-\-authority\fP, \fI\%\-\-area\fP, \fI\%\-\-bbox\fP an
 New in version 6.3.
 
 .sp
-"Promote" the CRS(s) to their 3D version. In the context of researching
-available coordinate transformations, explicitly specifying this option is
-not necessary, because when one of the source or target CRS has a vertical
-component but not the other one, the one that has no vertical component is
-automatically promoted to a 3D version, where its vertical axis is the
+"Promote" 2D CRS(s) to their 3D version, where the vertical axis is the
 ellipsoidal height in metres, using the ellipsoid of the base geodetic CRS.
+Depending on PROJ versions and the exact nature of the CRS involved,
+especially before PROJ 9.1, a mix of 2D and 3D CRS could lead to 2D or 3D
+transformations. Starting with PROJ 9.1, both CRS need to be 3D for vertical
+transformation to possibly happen.
 .UNINDENT
 .INDENT 0.0
 .TP
@@ -453,7 +458,7 @@ auxiliary databases, instead of directly modifying the main \fBproj.db\fP databa
 See the \fI\%example how to export to an auxiliary database\fP\&.
 .sp
 Those auxiliary databases can be specified through
-\fBproj_context_set_database_path()\fP or the \fBPROJ_AUX_DB\fP
+\fBproj_context_set_database_path()\fP or the \fI\%PROJ_AUX_DB\fP
 environment variable.
 .UNINDENT
 .INDENT 0.0
@@ -484,7 +489,7 @@ that will override them.
 New in version 7.0.
 
 .sp
-Display information regarding if network is enabled, and the
+Display information regarding if \fI\%Network capabilities\fP is enabled, and the
 related URL.
 .UNINDENT
 .SH EXAMPLES
@@ -821,6 +826,6 @@ where new bug reports can be submitted to.
 .SH AUTHOR
 Even Rouault
 .SH COPYRIGHT
-1983-2021
+1983-2023
 .\" Generated by docutils manpage writer.
 .

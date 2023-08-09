@@ -20,8 +20,8 @@ UPSTREAM_VERSION = $(shell echo $(DEB_VERSION_UPSTREAM) | sed -e 's/\+.*//')
 
 datumgrids: datumgrids-stamp
 datumgrids-stamp:
-	unshar -c -d $(CURDIR)/data $(CURDIR)/debian/datumgrids.shar
-	unshar -c -d $(CURDIR)/data $(CURDIR)/debian/datumgrids-ch.shar
+	TZ=UTC unshar -c -d $(CURDIR)/data $(CURDIR)/debian/datumgrids.shar
+	TZ=UTC unshar -c -d $(CURDIR)/data $(CURDIR)/debian/datumgrids-ch.shar
 	touch $@
 
 %:
@@ -34,7 +34,8 @@ override_dh_auto_clean:
 	dh_auto_clean
 
 override_dh_auto_configure: datumgrids
-	dh_auto_configure
+	dh_auto_configure -- -DCMAKE_BUILD_RPATH_USE_ORIGIN=ON \
+	                     -DRUN_NETWORK_DEPENDENT_TESTS=OFF
 
 override_dh_auto_test:
 # Ignore test failures on problematic architectures only
@@ -47,9 +48,6 @@ endif
 override_dh_auto_install:
 	dh_auto_install
 	
-	# Empty dependency_libs in .la files
-	sed -i "/dependency_libs/ s/'.*'/''/" `find . -name '*.la'`
-
 	# Explicitly remove files
 	$(RM) $(CURDIR)/debian/*/usr/share/doc/proj/AUTHORS
 	$(RM) $(CURDIR)/debian/*/usr/share/doc/proj/COPYING
