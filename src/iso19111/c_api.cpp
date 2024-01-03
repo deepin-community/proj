@@ -191,7 +191,7 @@ getDBcontextNoException(PJ_CONTEXT *ctx, const char *function) {
 }
 // ---------------------------------------------------------------------------
 
-static PJ *pj_obj_create(PJ_CONTEXT *ctx, const BaseObjectNNPtr &objIn) {
+PJ *pj_obj_create(PJ_CONTEXT *ctx, const BaseObjectNNPtr &objIn) {
     auto coordop = dynamic_cast<const CoordinateOperation *>(objIn.get());
     if (coordop) {
         auto dbContext = getDBcontextNoException(ctx, __FUNCTION__);
@@ -9110,7 +9110,8 @@ PJ *proj_normalize_for_visualization(PJ_CONTEXT *ctx, const PJ *obj) {
                         alt.idxInOriginalList, minxSrc, minySrc, maxxSrc,
                         maxySrc, minxDst, minyDst, maxxDst, maxyDst,
                         pjNormalized, co->nameStr(), alt.accuracy,
-                        alt.isOffshore, alt.pjSrcGeocentricToLonLat,
+                        alt.pseudoArea, alt.areaName.c_str(),
+                        alt.pjSrcGeocentricToLonLat,
                         alt.pjDstGeocentricToLonLat);
                 }
             }

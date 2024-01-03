@@ -342,7 +342,10 @@ struct PJCoordOperation {
     PJ *pj = nullptr;
     std::string name{};
     double accuracy = -1.0;
+    double pseudoArea = 0.0;
+    std::string areaName{};
     bool isOffshore = false;
+    bool isUnknownAreaName = false;
     bool isPriorityOp = false;
     bool srcIsLonLatDegree = false;
     bool srcIsLatLonDegree = false;
@@ -363,8 +366,8 @@ struct PJCoordOperation {
                      double minySrcIn, double maxxSrcIn, double maxySrcIn,
                      double minxDstIn, double minyDstIn, double maxxDstIn,
                      double maxyDstIn, PJ *pjIn, const std::string &nameIn,
-                     double accuracyIn, bool isOffshoreIn,
-                     const PJ *pjSrcGeocentricToLonLatIn,
+                     double accuracyIn, double pseudoAreaIn,
+                     const char *areaName, const PJ *pjSrcGeocentricToLonLatIn,
                      const PJ *pjDstGeocentricToLonLatIn);
 
     PJCoordOperation(const PJCoordOperation &) = delete;
@@ -376,7 +379,10 @@ struct PJCoordOperation {
           minyDst(other.minyDst), maxxDst(other.maxxDst),
           maxyDst(other.maxyDst), pj(proj_clone(ctx, other.pj)),
           name(std::move(other.name)), accuracy(other.accuracy),
-          isOffshore(other.isOffshore), isPriorityOp(other.isPriorityOp),
+          pseudoArea(other.pseudoArea), areaName(other.areaName),
+          isOffshore(other.isOffshore),
+          isUnknownAreaName(other.isUnknownAreaName),
+          isPriorityOp(other.isPriorityOp),
           srcIsLonLatDegree(other.srcIsLonLatDegree),
           srcIsLatLonDegree(other.srcIsLatLonDegree),
           dstIsLonLatDegree(other.dstIsLonLatDegree),
@@ -396,7 +402,9 @@ struct PJCoordOperation {
           maxySrc(other.maxySrc), minxDst(other.minxDst),
           minyDst(other.minyDst), maxxDst(other.maxxDst),
           maxyDst(other.maxyDst), name(std::move(other.name)),
-          accuracy(other.accuracy), isOffshore(other.isOffshore),
+          accuracy(other.accuracy), pseudoArea(other.pseudoArea),
+          areaName(std::move(other.areaName)), isOffshore(other.isOffshore),
+          isUnknownAreaName(other.isUnknownAreaName),
           isPriorityOp(other.isPriorityOp),
           srcIsLonLatDegree(other.srcIsLonLatDegree),
           srcIsLatLonDegree(other.srcIsLatLonDegree),
@@ -420,7 +428,7 @@ struct PJCoordOperation {
                maxxDst == other.maxxDst && maxyDst == other.maxyDst &&
                name == other.name &&
                proj_is_equivalent_to(pj, other.pj, PJ_COMP_STRICT) &&
-               accuracy == other.accuracy && isOffshore == other.isOffshore;
+               accuracy == other.accuracy && areaName == other.areaName;
     }
 
     bool operator!=(const PJCoordOperation &other) const {
@@ -966,6 +974,8 @@ void pj_clear_sqlite_cache();
 
 PJ_LP pj_generic_inverse_2d(PJ_XY xy, PJ *P, PJ_LP lpInitial,
                             double deltaXYTolerance);
+
+PJ *pj_obj_create(PJ_CONTEXT *ctx, const NS_PROJ::util::BaseObjectNNPtr &objIn);
 
 /*****************************************************************************/
 /*                                                                           */

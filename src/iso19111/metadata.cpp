@@ -343,6 +343,13 @@ bool GeographicBoundingBox::Private::intersects(const Private &other) const {
             return false;
         }
 
+        // Bail out on longitudes not in [-180,180]. We could probably make
+        // some sense of them, but this check at least avoid potential infinite
+        // recursion.
+        if (oW > 180 || oE < -180) {
+            return false;
+        }
+
         return intersects(Private(oW, oS, 180.0, oN)) ||
                intersects(Private(-180.0, oS, oE, oN));
 
@@ -418,6 +425,13 @@ GeographicBoundingBox::Private::intersection(const Private &otherExtent) const {
                 return internal::make_unique<Private>(resW, std::max(S, oS),
                                                       resE, std::min(N, oN));
             }
+            return nullptr;
+        }
+
+        // Bail out on longitudes not in [-180,180]. We could probably make
+        // some sense of them, but this check at least avoid potential infinite
+        // recursion.
+        if (oW > 180 || oE < -180) {
             return nullptr;
         }
 
@@ -1081,10 +1095,11 @@ void Identifier::_exportToWKT(WKTFormatter *formatter) const {
                 formatter->addQuotedString(l_code);
             }
             if (!l_version.empty()) {
-                try {
-                    (void)c_locale_stod(l_version);
+                bool isDouble = false;
+                (void)c_locale_stod(l_version, isDouble);
+                if (isDouble) {
                     formatter->add(l_version);
-                } catch (const std::exception &) {
+                } else {
                     formatter->addQuotedString(l_version);
                 }
             }
@@ -1133,16 +1148,11 @@ void Identifier::_exportToJSON(JSONFormatter *formatter) const {
 
         if (!l_version.empty()) {
             writer->AddObjKey("version");
-            try {
-                const double dblVersion = c_locale_stod(l_version);
-                if (dblVersion >= std::numeric_limits<int>::min() &&
-                    dblVersion <= std::numeric_limits<int>::max() &&
-                    static_cast<int>(dblVersion) == dblVersion) {
-                    writer->Add(static_cast<int>(dblVersion));
-                } else {
-                    writer->Add(dblVersion);
-                }
-            } catch (const std::exception &) {
+            bool isDouble = false;
+            (void)c_locale_stod(l_version, isDouble);
+            if (isDouble) {
+                writer->AddUnquoted(l_version.c_str());
+            } else {
                 writer->Add(l_version);
             }
         }

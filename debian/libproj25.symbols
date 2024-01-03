@@ -1,4 +1,4 @@
-# SymbolsHelper-Confirmed: 9.2.1~rc1 alpha amd64 ia64 m68k sh4
+# SymbolsHelper-Confirmed: 9.3.1~rc1 amd64 riscv64 sparc64
 libproj.so.25 #PACKAGE# #MINVER#
 * Build-Depends-Package: libproj-dev
  _Z10pj_ell_setP6pj_ctxP8ARG_listPdS3_@Base 8.0.0
@@ -25,8 +25,8 @@ libproj.so.25 #PACKAGE# #MINVER#
  _Z6dmstorPKcPPc@Base 6.0.0
  _Z6pj_fwd5PJ_LPP8PJconsts@Base 8.0.0
  _Z6pj_inv5PJ_XYP8PJconsts@Base 8.0.0
- (arch=!alpha !amd64 !arm64 !ia64 !mips64el !ppc64 !ppc64el !riscv64 !s390x !sparc64)_Z6rtodmsPcjdii@Base 9.2.0
- (arch=alpha amd64 arm64 ia64 mips64el ppc64 ppc64el riscv64 s390x sparc64)_Z6rtodmsPcmdii@Base 9.2.1
+ (arch=!alpha !amd64 !arm64 !ia64 !loong64 !mips64el !ppc64 !ppc64el !riscv64 !s390x !sparc64)_Z6rtodmsPcjdii@Base 9.2.0
+ (arch=alpha amd64 arm64 ia64 loong64 mips64el ppc64 ppc64el riscv64 s390x sparc64)_Z6rtodmsPcmdii@Base 9.3.0
  _Z7pj_atofPKc@Base 6.0.0
  _Z7pj_phi2P6pj_ctxdd@Base 8.0.0
  _Z8pj_chompPc@Base 6.0.0
@@ -234,8 +234,12 @@ libproj.so.25 #PACKAGE# #MINVER#
  _ZN5osgeo4proj2io16AuthorityFactory6createERKN7dropbox6oxygen2nnISt10shared_ptrINS1_15DatabaseContextEEEERKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE@Base 6.0.0
  _ZN5osgeo4proj2io16AuthorityFactory7CRSInfoC1Ev@Base 6.1.0
  _ZN5osgeo4proj2io16AuthorityFactory7CRSInfoC2Ev@Base 6.1.0
+ _ZN5osgeo4proj2io16AuthorityFactory7CRSInfoD1Ev@Base 9.3.0
+ _ZN5osgeo4proj2io16AuthorityFactory7CRSInfoD2Ev@Base 9.3.0
  _ZN5osgeo4proj2io16AuthorityFactory8UnitInfoC1Ev@Base 7.1.0
  _ZN5osgeo4proj2io16AuthorityFactory8UnitInfoC2Ev@Base 7.1.0
+ _ZN5osgeo4proj2io16AuthorityFactory8UnitInfoD1Ev@Base 9.3.0
+ _ZN5osgeo4proj2io16AuthorityFactory8UnitInfoD2Ev@Base 9.3.0
  _ZN5osgeo4proj2io16AuthorityFactoryD1Ev@Base 6.0.0
  _ZN5osgeo4proj2io16AuthorityFactoryD2Ev@Base 6.0.0
  _ZN5osgeo4proj2io16FactoryExceptionC1EPKc@Base 6.0.0
@@ -301,8 +305,8 @@ libproj.so.25 #PACKAGE# #MINVER#
  _ZN5osgeo4proj2io28NoSuchAuthorityCodeExceptionD0Ev@Base 6.0.0
  _ZN5osgeo4proj2io28NoSuchAuthorityCodeExceptionD1Ev@Base 6.0.0
  _ZN5osgeo4proj2io28NoSuchAuthorityCodeExceptionD2Ev@Base 6.0.0
- (arch=!alpha !amd64 !arm64 !ia64 !kfreebsd-amd64 !mips64el !ppc64 !ppc64el !riscv64 !s390x !sparc64)_ZN5osgeo4proj2io7WKTNode10createFromERKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEj@Base 6.0.0
- (arch=alpha amd64 arm64 ia64 kfreebsd-amd64 mips64el ppc64 ppc64el riscv64 s390x sparc64)_ZN5osgeo4proj2io7WKTNode10createFromERKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEm@Base 6.2.0
+ (arch=!alpha !amd64 !arm64 !ia64 !kfreebsd-amd64 !loong64 !mips64el !ppc64 !ppc64el !riscv64 !s390x !sparc64)_ZN5osgeo4proj2io7WKTNode10createFromERKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEj@Base 6.0.0
+ (arch=alpha amd64 arm64 ia64 kfreebsd-amd64 loong64 mips64el ppc64 ppc64el riscv64 s390x sparc64)_ZN5osgeo4proj2io7WKTNode10createFromERKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEm@Base 9.3.0
  _ZN5osgeo4proj2io7WKTNode8addChildEON7dropbox6oxygen2nnISt10unique_ptrIS2_St14default_deleteIS2_EEEE@Base 6.0.0
  _ZN5osgeo4proj2io7WKTNodeC1ERKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE@Base 6.0.0
  _ZN5osgeo4proj2io7WKTNodeC2ERKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE@Base 6.0.0
@@ -411,8 +415,8 @@ libproj.so.25 #PACKAGE# #MINVER#
  _ZN5osgeo4proj3crs9SingleCRSD0Ev@Base 6.0.0
  _ZN5osgeo4proj3crs9SingleCRSD1Ev@Base 6.0.0
  _ZN5osgeo4proj3crs9SingleCRSD2Ev@Base 6.0.0
- (arch=!alpha !amd64 !arm64 !ia64 !kfreebsd-amd64 !mips64el !ppc64 !ppc64el !riscv64 !s390x !sparc64)_ZN5osgeo4proj4File9read_lineB5cxx11EjRbS2_@Base 7.0.0
- (arch=alpha amd64 arm64 ia64 mips64el ppc64 ppc64el riscv64 s390x sparc64)_ZN5osgeo4proj4File9read_lineB5cxx11EmRbS2_@Base 8.0.1
+ (arch=!alpha !amd64 !arm64 !ia64 !kfreebsd-amd64 !loong64 !mips64el !ppc64 !ppc64el !riscv64 !s390x !sparc64)_ZN5osgeo4proj4File9read_lineB5cxx11EjRbS2_@Base 7.0.0
+ (arch=alpha amd64 arm64 ia64 loong64 mips64el ppc64 ppc64el riscv64 s390x sparc64)_ZN5osgeo4proj4File9read_lineB5cxx11EmRbS2_@Base 9.3.0
  _ZN5osgeo4proj4FileD0Ev@Base 7.0.0
  _ZN5osgeo4proj4FileD1Ev@Base 7.0.0
  _ZN5osgeo4proj4FileD2Ev@Base 7.0.0
@@ -748,6 +752,7 @@ libproj.so.25 #PACKAGE# #MINVER#
  _ZN5osgeo4proj9operation10Conversion22createMercatorVariantBERKNS0_4util11PropertyMapERKNS0_6common5AngleESA_RKNS7_6LengthESD_@Base 6.0.0
  _ZN5osgeo4proj9operation10Conversion23createAmericanPolyconicERKNS0_4util11PropertyMapERKNS0_6common5AngleESA_RKNS7_6LengthESD_@Base 6.0.0
  _ZN5osgeo4proj9operation10Conversion23createAxisOrderReversalEb@Base 6.0.0
+ _ZN5osgeo4proj9operation10Conversion23createMercatorSphericalERKNS0_4util11PropertyMapERKNS0_6common5AngleESA_RKNS7_6LengthESD_@Base 9.3.0
  _ZN5osgeo4proj9operation10Conversion23createMillerCylindricalERKNS0_4util11PropertyMapERKNS0_6common5AngleERKNS7_6LengthESD_@Base 6.0.0
  _ZN5osgeo4proj9operation10Conversion23createTunisiaMiningGridERKNS0_4util11PropertyMapERKNS0_6common5AngleESA_RKNS7_6LengthESD_@Base 9.2.0
  _ZN5osgeo4proj9operation10Conversion24createChangeVerticalUnitERKNS0_4util11PropertyMapE@Base 8.1.0
@@ -868,6 +873,9 @@ libproj.so.25 #PACKAGE# #MINVER#
  _ZN5osgeo4proj9operation21ConcatenatedOperationD0Ev@Base 6.0.0
  _ZN5osgeo4proj9operation21ConcatenatedOperationD1Ev@Base 6.0.0
  _ZN5osgeo4proj9operation21ConcatenatedOperationD2Ev@Base 7.1.1
+ _ZN5osgeo4proj9operation21CoordinateTransformer9transformE8PJ_COORD@Base 9.3.0
+ _ZN5osgeo4proj9operation21CoordinateTransformerD1Ev@Base 9.3.0
+ _ZN5osgeo4proj9operation21CoordinateTransformerD2Ev@Base 9.3.0
  _ZN5osgeo4proj9operation21GeneralParameterValueD0Ev@Base 6.0.0
  _ZN5osgeo4proj9operation21GeneralParameterValueD1Ev@Base 6.0.0
  _ZN5osgeo4proj9operation21GeneralParameterValueD2Ev@Base 6.0.0
@@ -898,6 +906,12 @@ libproj.so.25 #PACKAGE# #MINVER#
  _ZN5osgeo4proj9operation26CoordinateOperationFactoryD0Ev@Base 6.0.0
  _ZN5osgeo4proj9operation26CoordinateOperationFactoryD1Ev@Base 6.0.0
  _ZN5osgeo4proj9operation26CoordinateOperationFactoryD2Ev@Base 6.0.0
+ (optional=templinst|arch=sh4)_ZN9__gnu_cxx12__to_xstringINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEcEET_PFiPT0_jPKS8_13__va_list_tagEjSB_z@Base 9.3.0
+ (optional=templinst|arch=powerpc x32)_ZN9__gnu_cxx12__to_xstringINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEcEET_PFiPT0_jPKS8_P13__va_list_tagEjSB_z@Base 9.3.0
+ (optional=templinst|arch=amd64 s390x)_ZN9__gnu_cxx12__to_xstringINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEcEET_PFiPT0_mPKS8_P13__va_list_tagEmSB_z@Base 9.3.0
+ (optional=templinst|arch=hurd-i386 i386 ppc64 ppc64el|subst)_ZN9__gnu_cxx12__to_xstringINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEcEET_PFiPT0_{size_t}PKS8_PcE{size_t}SB_z@Base 9.3.0
+ (optional=templinst|arch=hppa ia64 loong64 m68k mips64el riscv64 sparc64|subst)_ZN9__gnu_cxx12__to_xstringINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEcEET_PFiPT0_{size_t}PKS8_PvE{size_t}SB_z@Base 9.3.0
+ (optional=templinst|arch=arm64 armel armhf|subst)_ZN9__gnu_cxx12__to_xstringINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEcEET_PFiPT0_{size_t}PKS8_St9__va_listE{size_t}SB_z@Base 9.3.0
  (arch=armel riscv64)_ZN9__gnu_cxx24__concurrence_lock_errorD0Ev@Base 6.0.0
  (arch=armel riscv64)_ZN9__gnu_cxx24__concurrence_lock_errorD1Ev@Base 6.0.0
  (arch=armel riscv64)_ZN9__gnu_cxx24__concurrence_lock_errorD2Ev@Base 6.0.0
@@ -906,8 +920,8 @@ libproj.so.25 #PACKAGE# #MINVER#
  (arch=armel riscv64)_ZN9__gnu_cxx26__concurrence_unlock_errorD2Ev@Base 6.0.0
  (arch=armel riscv64)_ZN9__gnu_cxx30__throw_concurrence_lock_errorEv@Base 6.0.0
  (arch=armel riscv64)_ZN9__gnu_cxx32__throw_concurrence_unlock_errorEv@Base 6.0.0
- (optional=templinst|arch=!alpha !amd64 !arm64 !ia64 !kfreebsd-amd64 !mips64el !ppc64 !ppc64el !riscv64 !s390x !sparc64)_ZN9__gnu_cxx6__stoaIlicJiEEET0_PFT_PKT1_PPS3_DpT2_EPKcS5_PjS9_@Base 6.0.0
- (optional=templinst|arch=alpha amd64 arm64 ia64 kfreebsd-amd64 mips64el ppc64 ppc64el riscv64 s390x sparc64)_ZN9__gnu_cxx6__stoaIlicJiEEET0_PFT_PKT1_PPS3_DpT2_EPKcS5_PmS9_@Base 6.0.0
+ (optional=templinst|arch=!alpha !amd64 !arm64 !ia64 !kfreebsd-amd64 !loong64 !mips64el !ppc64 !ppc64el !riscv64 !s390x !sparc64)_ZN9__gnu_cxx6__stoaIlicJiEEET0_PFT_PKT1_PPS3_DpT2_EPKcS5_PjS9_@Base 6.0.0
+ (optional=templinst|arch=alpha amd64 arm64 ia64 kfreebsd-amd64 loong64 mips64el ppc64 ppc64el riscv64 s390x sparc64)_ZN9__gnu_cxx6__stoaIlicJiEEET0_PFT_PKT1_PPS3_DpT2_EPKcS5_PmS9_@Base 6.0.0
  _ZNK5osgeo4proj11coordinates18CoordinateMetadata15coordinateEpochEv@Base 9.2.0
  _ZNK5osgeo4proj11coordinates18CoordinateMetadata28coordinateEpochAsDecimalYearEv@Base 9.2.0
  _ZNK5osgeo4proj11coordinates18CoordinateMetadata3crsEv@Base 9.2.0
@@ -964,8 +978,8 @@ libproj.so.25 #PACKAGE# #MINVER#
  _ZNK5osgeo4proj2io16AuthorityFactory19createUnitOfMeasureERKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE@Base 6.0.0
  _ZNK5osgeo4proj2io16AuthorityFactory19createVerticalDatumERKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE@Base 6.0.0
  _ZNK5osgeo4proj2io16AuthorityFactory20getCelestialBodyListB5cxx11Ev@Base 8.1.0
- (arch=!alpha !amd64 !arm64 !ia64 !kfreebsd-amd64 !mips64el !ppc64 !ppc64el !riscv64 !s390x !sparc64)_ZNK5osgeo4proj2io16AuthorityFactory21createObjectsFromNameERKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEERKSt6vectorINS2_10ObjectTypeESaISC_EEbj@Base 6.0.0
- (arch=alpha amd64 arm64 ia64 kfreebsd-amd64 mips64el ppc64 ppc64el riscv64 s390x sparc64)_ZNK5osgeo4proj2io16AuthorityFactory21createObjectsFromNameERKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEERKSt6vectorINS2_10ObjectTypeESaISC_EEbm@Base 6.2.0
+ (arch=!alpha !amd64 !arm64 !ia64 !kfreebsd-amd64 !loong64 !mips64el !ppc64 !ppc64el !riscv64 !s390x !sparc64)_ZNK5osgeo4proj2io16AuthorityFactory21createObjectsFromNameERKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEERKSt6vectorINS2_10ObjectTypeESaISC_EEbj@Base 6.0.0
+ (arch=alpha amd64 arm64 ia64 kfreebsd-amd64 loong64 mips64el ppc64 ppc64el riscv64 s390x sparc64)_ZNK5osgeo4proj2io16AuthorityFactory21createObjectsFromNameERKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEERKSt6vectorINS2_10ObjectTypeESaISC_EEbm@Base 9.3.0
  _ZNK5osgeo4proj2io16AuthorityFactory21listAreaOfUseFromNameERKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEb@Base 6.0.0
  _ZNK5osgeo4proj2io16AuthorityFactory22createCoordinateSystemERKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE@Base 6.0.0
  _ZNK5osgeo4proj2io16AuthorityFactory24getOfficialNameFromAliasERKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESA_SA_bRS8_SB_SB_@Base 6.0.0
@@ -1179,6 +1193,7 @@ libproj.so.25 #PACKAGE# #MINVER#
  _ZNK5osgeo4proj9operation19CoordinateOperation16interpolationCRSEv@Base 6.0.0
  _ZNK5osgeo4proj9operation19CoordinateOperation16operationVersionB5cxx11Ev@Base 6.0.0
  _ZNK5osgeo4proj9operation19CoordinateOperation18isPROJInstantiableERKSt10shared_ptrINS0_2io15DatabaseContextEEb@Base 7.0.0
+ _ZNK5osgeo4proj9operation19CoordinateOperation21coordinateTransformerEP6pj_ctx@Base 9.3.0
  _ZNK5osgeo4proj9operation19CoordinateOperation21sourceCoordinateEpochEv@Base 6.0.0
  _ZNK5osgeo4proj9operation19CoordinateOperation21targetCoordinateEpochEv@Base 6.0.0
  _ZNK5osgeo4proj9operation19CoordinateOperation25hasBallparkTransformationEv@Base 6.0.0
@@ -1229,7 +1244,17 @@ libproj.so.25 #PACKAGE# #MINVER#
  (optional=templinst)_ZNSt10unique_ptrIN5osgeo4proj9operation26CoordinateOperationContextESt14default_deleteIS3_EED2Ev@Base 7.1.1
  (optional=templinst)_ZNSt10unique_ptrIN5osgeo4proj9operation26CoordinateOperationFactoryESt14default_deleteIS3_EED1Ev@Base 7.1.1
  (optional=templinst)_ZNSt10unique_ptrIN5osgeo4proj9operation26CoordinateOperationFactoryESt14default_deleteIS3_EED2Ev@Base 7.1.1
- (optional=templinst)_ZNSt12_Destroy_auxILb0EE9__destroyIPNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEEEvT_S9_@Base 9.1.0
+ (optional=templinst)_ZNSt12_Destroy_auxILb0EE9__destroyIPN5osgeo4proj2io4Step8KeyValueEEEvT_S8_@Base 9.3.0
+ (optional=templinst|arch=loong64)_ZNSt12_Destroy_auxILb0EE9__destroyIPNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEEEvT_S9_@Base 9.3.0
+ (optional=templinst)_ZNSt12_Destroy_auxILb0EE9__destroyIPSt4pairINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEES8_EEEvT_SB_@Base 9.3.0
+ (optional=templinst)_ZNSt12_Vector_baseIN5osgeo4proj2io16AuthorityFactory10ObjectTypeESaIS4_EED1Ev@Base 9.3.0
+ (optional=templinst)_ZNSt12_Vector_baseIN5osgeo4proj2io16AuthorityFactory10ObjectTypeESaIS4_EED2Ev@Base 9.3.0
+ (optional=templinst)_ZNSt12_Vector_baseINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESaIS5_EED1Ev@Base 9.3.0
+ (optional=templinst)_ZNSt12_Vector_baseINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESaIS5_EED2Ev@Base 9.3.0
+ (optional=templinst)_ZNSt12_Vector_baseIdSaIdEED1Ev@Base 9.3.0
+ (optional=templinst)_ZNSt12_Vector_baseIdSaIdEED2Ev@Base 9.3.0
+ (optional=templinst)_ZNSt12_Vector_baseIiSaIiEED1Ev@Base 9.3.0
+ (optional=templinst)_ZNSt12_Vector_baseIiSaIiEED2Ev@Base 9.3.0
  (optional=templinst)_ZNSt13_Bvector_baseISaIbEE13_M_deallocateEv@Base 6.0.0
  _ZNSt14_Function_baseD1Ev@Base 7.1.1
  _ZNSt14_Function_baseD2Ev@Base 7.1.1
@@ -1907,6 +1932,10 @@ libproj.so.25 #PACKAGE# #MINVER#
  (optional=templinst|arch=!armel !riscv64)_ZNSt15_Sp_counted_ptrIPSt6vectorIhSaIhEELN9__gnu_cxx12_Lock_policyE2EED0Ev@Base 7.0.0
  (optional=templinst|arch=!armel !riscv64)_ZNSt15_Sp_counted_ptrIPSt6vectorIhSaIhEELN9__gnu_cxx12_Lock_policyE2EED1Ev@Base 7.0.0
  (optional=templinst|arch=!armel !riscv64)_ZNSt15_Sp_counted_ptrIPSt6vectorIhSaIhEELN9__gnu_cxx12_Lock_policyE2EED2Ev@Base 7.1.1
+ (optional=templinst)_ZNSt15__allocated_ptrISaISt10_List_nodeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEEEED1Ev@Base 9.3.0
+ (optional=templinst)_ZNSt15__allocated_ptrISaISt10_List_nodeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEEEED2Ev@Base 9.3.0
+ (optional=templinst)_ZNSt15__allocated_ptrISaISt10_List_nodeISt4pairINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEES7_EEEED1Ev@Base 9.3.0
+ (optional=templinst)_ZNSt15__allocated_ptrISaISt10_List_nodeISt4pairINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEES7_EEEED2Ev@Base 9.3.0
  (optional=templinst|arch=armel riscv64)_ZNSt16_Sp_counted_baseILN9__gnu_cxx12_Lock_policyE1EE10_M_destroyEv@Base 6.0.0
  (optional=templinst|arch=armel riscv64)_ZNSt16_Sp_counted_baseILN9__gnu_cxx12_Lock_policyE1EE10_M_releaseEv@Base 6.0.0
  (optional=templinst|arch=armel riscv64)_ZNSt16_Sp_counted_baseILN9__gnu_cxx12_Lock_policyE1EE15_M_add_ref_copyEv@Base 7.1.1
@@ -1915,7 +1944,7 @@ libproj.so.25 #PACKAGE# #MINVER#
  (optional=templinst|arch=!armel !riscv64)_ZNSt16_Sp_counted_baseILN9__gnu_cxx12_Lock_policyE2EE10_M_releaseEv@Base 6.0.0
  (optional=templinst|arch=!armel !riscv64)_ZNSt16_Sp_counted_baseILN9__gnu_cxx12_Lock_policyE2EE15_M_add_ref_copyEv@Base 7.1.1
  (optional=templinst|arch=!armel !riscv64)_ZNSt16_Sp_counted_baseILN9__gnu_cxx12_Lock_policyE2EE15_M_weak_releaseEv@Base 6.0.0
- (optional=templinst|arch=alpha amd64 arm64 ia64 mips64el ppc64 ppc64el s390x)_ZNSt16_Sp_counted_baseILN9__gnu_cxx12_Lock_policyE2EE24_M_release_last_use_coldEv@Base 9.1.0
+ (optional=templinst|arch=alpha amd64 arm64 ia64 loong64 mips64el ppc64 ppc64el s390x)_ZNSt16_Sp_counted_baseILN9__gnu_cxx12_Lock_policyE2EE24_M_release_last_use_coldEv@Base 9.1.0
  (optional=templinst|arch=armel riscv64)_ZNSt23_Sp_counted_ptr_inplaceIN5osgeo4proj6common13UnitOfMeasureESaIvELN9__gnu_cxx12_Lock_policyE1EE10_M_destroyEv@Base 9.1.0
  (optional=templinst|arch=armel riscv64)_ZNSt23_Sp_counted_ptr_inplaceIN5osgeo4proj6common13UnitOfMeasureESaIvELN9__gnu_cxx12_Lock_policyE1EE10_M_disposeEv@Base 9.1.0
  (optional=templinst|arch=armel riscv64)_ZNSt23_Sp_counted_ptr_inplaceIN5osgeo4proj6common13UnitOfMeasureESaIvELN9__gnu_cxx12_Lock_policyE1EE14_M_get_deleterERKSt9type_info@Base 9.1.0
@@ -1940,30 +1969,33 @@ libproj.so.25 #PACKAGE# #MINVER#
  (optional=templinst|arch=!armel !riscv64)_ZNSt23_Sp_counted_ptr_inplaceISt6vectorIhSaIhEESaIvELN9__gnu_cxx12_Lock_policyE2EED0Ev@Base 9.1.0
  (optional=templinst|arch=!armel !riscv64)_ZNSt23_Sp_counted_ptr_inplaceISt6vectorIhSaIhEESaIvELN9__gnu_cxx12_Lock_policyE2EED1Ev@Base 9.1.0
  (optional=templinst|arch=!armel !riscv64)_ZNSt23_Sp_counted_ptr_inplaceISt6vectorIhSaIhEESaIvELN9__gnu_cxx12_Lock_policyE2EED2Ev@Base 9.1.0
- (optional=templinst)_ZNSt3mapINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE16S2ProjectionTypeSt4lessIS5_ESaISt4pairIKS5_S6_EEEC1ESt16initializer_listISB_ERKS8_RKSC_@Base 8.2.0
- (optional=templinst)_ZNSt3mapINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE16S2ProjectionTypeSt4lessIS5_ESaISt4pairIKS5_S6_EEEC2ESt16initializer_listISB_ERKS8_RKSC_@Base 8.2.0
+ (optional=templinst|arch=loong64)_ZNSt3mapINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE16S2ProjectionTypeSt4lessIS5_ESaISt4pairIKS5_S6_EEEC1ESt16initializer_listISB_ERKS8_RKSC_@Base 9.3.0
+ (optional=templinst|arch=loong64)_ZNSt3mapINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE16S2ProjectionTypeSt4lessIS5_ESaISt4pairIKS5_S6_EEEC2ESt16initializer_listISB_ERKS8_RKSC_@Base 9.3.0
  (optional=templinst)_ZNSt3mapINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE16S2ProjectionTypeSt4lessIS5_ESaISt4pairIKS5_S6_EEED1Ev@Base 8.2.0
  (optional=templinst)_ZNSt3mapINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE16S2ProjectionTypeSt4lessIS5_ESaISt4pairIKS5_S6_EEED2Ev@Base 8.2.0
- (optional=templinst|arch=amd64 arm64 hppa ia64 m68k mips64el ppc64el riscv64 sh4 sparc64 x32)_ZNSt3mapINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEENS0_4listISt6vectorIS5_SaIS5_EESaIS9_EEESt4lessIS5_ESaISt4pairIKS5_SB_EEEixERSF_@Base 8.1.1
- (optional=templinst|arch=alpha hurd-i386 i386)_ZNSt3mapINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEPKcSt4lessIS5_ESaISt4pairIKS5_S7_EEEixEOS5_@Base 9.2.0
+ (optional=templinst|arch=amd64 arm64 hppa ia64 loong64 m68k mips64el ppc64el riscv64 sh4 sparc64 x32)_ZNSt3mapINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEENS0_4listISt6vectorIS5_SaIS5_EESaIS9_EEESt4lessIS5_ESaISt4pairIKS5_SB_EEEixERSF_@Base 8.1.1
+ (optional=templinst)_ZNSt3mapINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEPKcSt4lessIS5_ESaISt4pairIKS5_S7_EEEixEOS5_@Base 9.2.0
  (optional=templinst)_ZNSt3mapINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEES5_St4lessIS5_ESaISt4pairIKS5_S5_EEEixERS9_@Base 6.2.0
  (optional=templinst)_ZNSt3mapINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESt10shared_ptrIN5osgeo4proj9operation19CoordinateOperationEESt4lessIS5_ESaISt4pairIKS5_SB_EEEixERSF_@Base 8.1.0
+ (optional=templinst|arch=!armel !m68k !sh4)_ZNSt3mapINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESt6vectorIS5_SaIS5_EESt4lessIS5_ESaISt4pairIKS5_S8_EEEixERSC_@Base 9.3.0
  (optional=templinst)_ZNSt3mapINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESt6vectorISt4pairIS5_S5_ESaIS8_EESt4lessIS5_ESaIS7_IKS5_SA_EEEixEOS5_@Base 8.1.1
  (optional=templinst)_ZNSt3mapINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEdSt4lessIS5_ESaISt4pairIKS5_dEEEixERS9_@Base 6.0.0
- (optional=templinst|arch=amd64 arm64 hppa ia64 m68k mips64el ppc64el riscv64 sh4 sparc64 x32)_ZNSt3mapISt4pairIN5osgeo4proj2io16AuthorityFactory10ObjectTypeENSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEENS6_4listIS0_ISB_SB_ESaISE_EEESt4lessISC_ESaIS0_IKSC_SG_EEEixERSJ_@Base 8.1.1
- (optional=templinst|arch=amd64 arm64 hppa ia64 mips64el ppc64el riscv64 sh4 sparc64 x32)_ZNSt3setINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESt4lessIS5_ESaIS5_EE6insertEOS5_@Base 7.1.1
- (optional=templinst|arch=amd64 arm64 hppa ia64 mips64el ppc64el riscv64 sh4 sparc64 x32)_ZNSt3setINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESt4lessIS5_ESaIS5_EE6insertERKS5_@Base 7.1.1
+ (optional=templinst|arch=amd64 arm64 hppa ia64 loong64 m68k mips64el ppc64el riscv64 sh4 sparc64 x32)_ZNSt3mapISt4pairIN5osgeo4proj2io16AuthorityFactory10ObjectTypeENSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEENS6_4listIS0_ISB_SB_ESaISE_EEESt4lessISC_ESaIS0_IKSC_SG_EEEixERSJ_@Base 8.1.1
+ (optional=templinst|arch=amd64 arm64 hppa ia64 loong64 mips64el ppc64el riscv64 sh4 sparc64 x32)_ZNSt3setINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESt4lessIS5_ESaIS5_EE6insertEOS5_@Base 7.1.1
+ (optional=templinst|arch=amd64 arm64 hppa ia64 loong64 mips64el ppc64el riscv64 sh4 sparc64 x32)_ZNSt3setINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESt4lessIS5_ESaIS5_EE6insertERKS5_@Base 7.1.1
  (optional=templinst)_ZNSt3setINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESt4lessIS5_ESaIS5_EED1Ev@Base 6.0.0
  (optional=templinst)_ZNSt3setINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESt4lessIS5_ESaIS5_EED2Ev@Base 6.0.0
  (optional=templinst)_ZNSt4pairINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEES5_EC1IS5_S5_Lb1EEERKS5_S9_@Base 8.0.1
  (optional=templinst)_ZNSt4pairINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEES5_EC2IS5_S5_Lb1EEERKS5_S9_@Base 8.0.1
- (optional=templinst)_ZNSt4pairINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEES5_ED1Ev@Base 9.1.0
- (optional=templinst)_ZNSt4pairINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEES5_ED2Ev@Base 9.1.0
+ (optional=templinst|arch=loong64)_ZNSt4pairINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEES5_ED1Ev@Base 9.3.0
+ (optional=templinst|arch=loong64)_ZNSt4pairINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEES5_ED2Ev@Base 9.3.0
  (optional=templinst)_ZNSt5dequeIdSaIdEE16_M_push_back_auxIJRKdEEEvDpOT_@Base 6.0.0
  (optional=templinst)_ZNSt6vectorIN5osgeo4proj2io16AuthorityFactory10ObjectTypeESaIS4_EE17_M_realloc_insertIJRKS4_EEEvN9__gnu_cxx17__normal_iteratorIPS4_S6_EEDpOT_@Base 6.0.0
  (optional=templinst)_ZNSt6vectorIN5osgeo4proj2io16AuthorityFactory10ObjectTypeESaIS4_EE17_M_realloc_insertIJS4_EEEvN9__gnu_cxx17__normal_iteratorIPS4_S6_EEDpOT_@Base 6.0.0
  (optional=templinst)_ZNSt6vectorIN5osgeo4proj2io16AuthorityFactory10ObjectTypeESaIS4_EEC1ESt16initializer_listIS4_ERKS5_@Base 6.0.0
  (optional=templinst)_ZNSt6vectorIN5osgeo4proj2io16AuthorityFactory10ObjectTypeESaIS4_EEC2ESt16initializer_listIS4_ERKS5_@Base 6.0.0
+ (optional=templinst)_ZNSt6vectorIN5osgeo4proj2io16AuthorityFactory10ObjectTypeESaIS4_EED1Ev@Base 9.3.0
+ (optional=templinst)_ZNSt6vectorIN5osgeo4proj2io16AuthorityFactory10ObjectTypeESaIS4_EED2Ev@Base 9.3.0
  (optional=templinst)_ZNSt6vectorINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESaIS5_EE12emplace_backIJRKS5_EEEvDpOT_@Base 9.1.0
  (optional=templinst)_ZNSt6vectorINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESaIS5_EE12emplace_backIJS5_EEEvDpOT_@Base 9.1.0
  (optional=templinst)_ZNSt6vectorINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESaIS5_EE17_M_realloc_insertIJEEEvN9__gnu_cxx17__normal_iteratorIPS5_S7_EEDpOT_@Base 6.0.0
@@ -1991,23 +2023,30 @@ libproj.so.25 #PACKAGE# #MINVER#
  (optional=templinst)_ZNSt6vectorISt4pairINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEES6_ESaIS7_EED1Ev@Base 8.1.0
  (optional=templinst)_ZNSt6vectorISt4pairINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEES6_ESaIS7_EED2Ev@Base 8.1.0
  (optional=templinst)_ZNSt6vectorISt4pairINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEiESaIS7_EE17_M_realloc_insertIJS7_EEEvN9__gnu_cxx17__normal_iteratorIPS7_S9_EEDpOT_@Base 8.2.0
- (optional=templinst|arch=!alpha !amd64 !arm64 !ia64 !mips64el !ppc64 !ppc64el !riscv64 !s390x !sparc64)_ZNSt6vectorIbSaIbEE13_M_insert_auxESt13_Bit_iteratorb@Base 7.1.1
+ (optional=templinst|arch=!alpha !amd64 !arm64 !ia64 !loong64 !mips64el !ppc64 !ppc64el !riscv64 !s390x !sparc64)_ZNSt6vectorIbSaIbEE13_M_insert_auxESt13_Bit_iteratorb@Base 7.1.1
  (optional=templinst|subst)_ZNSt6vectorIbSaIbEE14_M_fill_insertESt13_Bit_iterator{size_t}b@Base 6.3.0
  (optional=templinst)_ZNSt6vectorIbSaIbEE9push_backEb@Base 6.2.0
  (optional=templinst)_ZNSt6vectorIbSaIbEEC1ESt16initializer_listIbERKS0_@Base 7.1.1
  (optional=templinst)_ZNSt6vectorIbSaIbEEC2ESt16initializer_listIbERKS0_@Base 7.1.1
  (optional=templinst)_ZNSt6vectorIcSaIcEE17_M_realloc_insertIJcEEEvN9__gnu_cxx17__normal_iteratorIPcS1_EEDpOT_@Base 6.2.0
- (optional=templinst|arch=!alpha !amd64 !arm64 !ia64 !mips64el !ppc64 !ppc64el !riscv64 !s390x !sparc64)_ZNSt6vectorIdSaIdEE14_M_fill_insertEN9__gnu_cxx17__normal_iteratorIPdS1_EEjRKd@Base 8.1.1
- (optional=templinst|arch=alpha amd64 arm64 ia64 mips64el ppc64 ppc64el riscv64 s390x sparc64)_ZNSt6vectorIdSaIdEE14_M_fill_insertEN9__gnu_cxx17__normal_iteratorIPdS1_EEmRKd@Base 8.1.1
- (optional=templinst|arch=!alpha !amd64 !arm64 !ia64 !mips64el !ppc64 !ppc64el !riscv64 !s390x !sparc64)_ZNSt6vectorIdSaIdEE17_M_default_appendEj@Base 8.1.1
- (optional=templinst|arch=alpha amd64 arm64 ia64 mips64el ppc64 ppc64el riscv64 s390x sparc64)_ZNSt6vectorIdSaIdEE17_M_default_appendEm@Base 8.1.1
+ (optional=templinst|arch=armel armhf hurd-i386 i386 m68k powerpc)_ZNSt6vectorIdSaIdEE12emplace_backIJdEEEvDpOT_@Base 9.3.0
+ (optional=templinst|arch=!alpha !amd64 !arm64 !ia64 !loong64 !mips64el !ppc64 !ppc64el !riscv64 !s390x !sparc64)_ZNSt6vectorIdSaIdEE14_M_fill_insertEN9__gnu_cxx17__normal_iteratorIPdS1_EEjRKd@Base 8.1.1
+ (optional=templinst|arch=alpha amd64 arm64 ia64 loong64 mips64el ppc64 ppc64el riscv64 s390x sparc64)_ZNSt6vectorIdSaIdEE14_M_fill_insertEN9__gnu_cxx17__normal_iteratorIPdS1_EEmRKd@Base 8.1.1
+ (optional=templinst|arch=!alpha !amd64 !arm64 !ia64 !loong64 !mips64el !ppc64 !ppc64el !riscv64 !s390x !sparc64)_ZNSt6vectorIdSaIdEE17_M_default_appendEj@Base 8.1.1
+ (optional=templinst|arch=alpha amd64 arm64 ia64 loong64 mips64el ppc64 ppc64el riscv64 s390x sparc64)_ZNSt6vectorIdSaIdEE17_M_default_appendEm@Base 8.1.1
  (optional=templinst)_ZNSt6vectorIdSaIdEE17_M_realloc_insertIJdEEEvN9__gnu_cxx17__normal_iteratorIPdS1_EEDpOT_@Base 6.0.0
+ (optional=templinst)_ZNSt6vectorIdSaIdEED1Ev@Base 9.3.0
+ (optional=templinst)_ZNSt6vectorIdSaIdEED2Ev@Base 9.3.0
  (optional=templinst|arch=armel armhf hppa hurd-i386 i386 m68k mipsel powerpc sh4 x32)_ZNSt6vectorIfSaIfEE17_M_default_appendEj@Base 9.1.0
- (optional=templinst|arch=alpha amd64 arm64 ia64 mips64el ppc64 ppc64el riscv64 s390x sparc64)_ZNSt6vectorIfSaIfEE17_M_default_appendEm@Base 9.1.0
- (optional=templinst|arch=!alpha !amd64 !arm64 !ia64 !kfreebsd-amd64 !mips64el !ppc64 !ppc64el !riscv64 !s390x !sparc64)_ZNSt6vectorIhSaIhEE17_M_default_appendEj@Base 7.0.0
- (optional=templinst|arch=alpha amd64 arm64 ia64 mips64el ppc64 ppc64el riscv64 s390x sparc64)_ZNSt6vectorIhSaIhEE17_M_default_appendEm@Base 7.0.0
+ (optional=templinst|arch=alpha amd64 arm64 ia64 loong64 mips64el ppc64 ppc64el riscv64 s390x sparc64)_ZNSt6vectorIfSaIfEE17_M_default_appendEm@Base 9.1.0
+ (optional=templinst)_ZNSt6vectorIfSaIfEED1Ev@Base 9.3.0
+ (optional=templinst)_ZNSt6vectorIfSaIfEED2Ev@Base 9.3.0
+ (optional=templinst|arch=!alpha !amd64 !arm64 !ia64 !kfreebsd-amd64 !loong64 !mips64el !ppc64 !ppc64el !riscv64 !s390x !sparc64)_ZNSt6vectorIhSaIhEE17_M_default_appendEj@Base 7.0.0
+ (optional=templinst|arch=alpha amd64 arm64 ia64 loong64 mips64el ppc64 ppc64el riscv64 s390x sparc64)_ZNSt6vectorIhSaIhEE17_M_default_appendEm@Base 7.0.0
+ (optional=templinst)_ZNSt6vectorIhSaIhEED1Ev@Base 9.3.0
+ (optional=templinst)_ZNSt6vectorIhSaIhEED2Ev@Base 9.3.0
  (optional=templinst)_ZNSt6vectorIjSaIjEE17_M_realloc_insertIJRKjEEEvN9__gnu_cxx17__normal_iteratorIPjS1_EEDpOT_@Base 7.2.0
- (optional=templinst|arch=alpha amd64 arm64 ia64 mips64el ppc64 ppc64el riscv64 s390x sparc64)_ZNSt6vectorImSaImEE17_M_realloc_insertIJRKmEEEvN9__gnu_cxx17__normal_iteratorIPmS1_EEDpOT_@Base 8.0.1
+ (optional=templinst|arch=alpha amd64 arm64 ia64 loong64 mips64el ppc64 ppc64el riscv64 s390x sparc64)_ZNSt6vectorImSaImEE17_M_realloc_insertIJRKmEEEvN9__gnu_cxx17__normal_iteratorIPmS1_EEDpOT_@Base 8.0.1
  (optional=templinst)_ZNSt6vectorIxSaIxEE17_M_realloc_insertIJxEEEvN9__gnu_cxx17__normal_iteratorIPxS1_EEDpOT_@Base 7.0.0
  (optional=templinst)_ZNSt7__cxx1110_List_baseIN5osgeo4proj2io16AuthorityFactory7CRSInfoESaIS5_EE8_M_clearEv@Base 6.0.0
  (optional=templinst)_ZNSt7__cxx1110_List_baseIN5osgeo4proj2io16AuthorityFactory8UnitInfoESaIS5_EE8_M_clearEv@Base 7.1.0
@@ -2017,15 +2056,15 @@ libproj.so.25 #PACKAGE# #MINVER#
  (optional=templinst)_ZNSt7__cxx1115basic_stringbufIcSt11char_traitsIcESaIcEED0Ev@Base 7.0.1
  (optional=templinst)_ZNSt7__cxx1115basic_stringbufIcSt11char_traitsIcESaIcEED1Ev@Base 7.0.1
  (optional=templinst)_ZNSt7__cxx1115basic_stringbufIcSt11char_traitsIcESaIcEED2Ev@Base 7.0.1
- (optional=templinst|arch=amd64 arm64 hppa ia64 m68k mips64el ppc64el riscv64 sh4 sparc64 x32)_ZNSt7__cxx114listINS_12basic_stringIcSt11char_traitsIcESaIcEEESaIS5_EE6insertIN9__gnu_cxx17__normal_iteratorIPS5_St6vectorIS5_S6_EEEvEESt14_List_iteratorIS5_ESt20_List_const_iteratorIS5_ET_SJ_@Base 9.2.0
+ (optional=templinst|arch=hurd-i386 i386 powerpc ppc64 s390x)_ZNSt7__cxx114listISt4pairINS_12basic_stringIcSt11char_traitsIcESaIcEEES6_ESaIS7_EE6insertISt20_List_const_iteratorIS7_EvEESt14_List_iteratorIS7_ESC_T_SF_@Base 9.3.0
  (optional=templinst)_ZNSt7__cxx114listISt4pairINS_12basic_stringIcSt11char_traitsIcESaIcEEES6_ESaIS7_EE9_M_insertIJS7_EEEvSt14_List_iteratorIS7_EDpOT_@Base 7.1.0
- (arch=!alpha !amd64 !arm64 !ia64 !mips64el !ppc64 !ppc64el !riscv64 !s390x !sparc64)_ZNSt7__cxx119to_stringEj@Base 7.1.1
- (arch=alpha amd64 arm64 ia64 mips64el ppc64 ppc64el riscv64 s390x sparc64)_ZNSt7__cxx119to_stringEm@Base 8.0.1
+ (arch=!alpha !amd64 !arm64 !ia64 !loong64 !mips64el !ppc64 !ppc64el !riscv64 !s390x !sparc64)_ZNSt7__cxx119to_stringEj@Base 7.1.1
+ (arch=alpha amd64 arm64 ia64 loong64 mips64el ppc64 ppc64el riscv64 s390x sparc64)_ZNSt7__cxx119to_stringEm@Base 9.3.0
  (optional=templinst)_ZNSt8_Rb_treeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEES5_St9_IdentityIS5_ESt4lessIS5_ESaIS5_EE16_M_insert_uniqueIRKS5_EESt4pairISt17_Rb_tree_iteratorIS5_EbEOT_@Base 6.0.0
  (optional=templinst|arch=!alpha !armel !armhf !hurd-i386 !i386 !m68k !mipsel !powerpc !ppc64 !s390x)_ZNSt8_Rb_treeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEES5_St9_IdentityIS5_ESt4lessIS5_ESaIS5_EE24_M_get_insert_unique_posERKS5_@Base 6.0.0
  (optional=templinst)_ZNSt8_Rb_treeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEES5_St9_IdentityIS5_ESt4lessIS5_ESaIS5_EE4findERKS5_@Base 6.3.1
  (optional=templinst)_ZNSt8_Rb_treeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESt4pairIKS5_16S2ProjectionTypeESt10_Select1stIS9_ESt4lessIS5_ESaIS9_EE24_M_get_insert_unique_posERS7_@Base 8.2.0
- (optional=templinst|arch=amd64 arm64 hppa ia64 m68k mips64el ppc64el riscv64 sh4 sparc64 x32)_ZNSt8_Rb_treeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESt4pairIKS5_16S2ProjectionTypeESt10_Select1stIS9_ESt4lessIS5_ESaIS9_EE29_M_get_insert_hint_unique_posESt23_Rb_tree_const_iteratorIS9_ERS7_@Base 8.2.0
+ (optional=templinst|arch=amd64 arm64 hppa ia64 loong64 m68k mips64el ppc64el riscv64 sh4 sparc64 x32)_ZNSt8_Rb_treeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESt4pairIKS5_16S2ProjectionTypeESt10_Select1stIS9_ESt4lessIS5_ESaIS9_EE29_M_get_insert_hint_unique_posESt23_Rb_tree_const_iteratorIS9_ERS7_@Base 8.2.0
  (optional=templinst)_ZNSt8_Rb_treeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESt4pairIKS5_NS0_4listISt6vectorIS5_SaIS5_EESaISB_EEEESt10_Select1stISE_ESt4lessIS5_ESaISE_EE24_M_get_insert_unique_posERS7_@Base 6.0.0
  (optional=templinst|arch=!alpha !armel !armhf !hurd-i386 !i386 !mipsel !powerpc !ppc64 !s390x)_ZNSt8_Rb_treeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESt4pairIKS5_NS0_4listISt6vectorIS5_SaIS5_EESaISB_EEEESt10_Select1stISE_ESt4lessIS5_ESaISE_EE29_M_get_insert_hint_unique_posESt23_Rb_tree_const_iteratorISE_ERS7_@Base 6.0.0
  (optional=templinst)_ZNSt8_Rb_treeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESt4pairIKS5_PKcESt10_Select1stISA_ESt4lessIS5_ESaISA_EE24_M_get_insert_unique_posERS7_@Base 6.0.0
@@ -2042,31 +2081,32 @@ libproj.so.25 #PACKAGE# #MINVER#
  (optional=templinst)_ZNSt8_Rb_treeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESt4pairIKS5_dESt10_Select1stIS8_ESt4lessIS5_ESaIS8_EE24_M_get_insert_unique_posERS7_@Base 6.0.0
  (optional=templinst|arch=!alpha !armel !armhf !hurd-i386 !i386 !mipsel !powerpc !ppc64 !s390x)_ZNSt8_Rb_treeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESt4pairIKS5_dESt10_Select1stIS8_ESt4lessIS5_ESaIS8_EE29_M_get_insert_hint_unique_posESt23_Rb_tree_const_iteratorIS8_ERS7_@Base 6.0.0
  (optional=templinst)_ZNSt8_Rb_treeINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESt4pairIKS5_dESt10_Select1stIS8_ESt4lessIS5_ESaIS8_EE4findERS7_@Base 6.0.0
- (optional=templinst)_ZNSt8_Rb_treeIPN5osgeo4proj9operation19CoordinateOperationESt4pairIKS4_St3setINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESt4lessISD_ESaISD_EEESt10_Select1stISI_ESE_IS4_ESaISI_EE24_M_get_insert_unique_posERS6_@Base 8.0.1
- (optional=templinst|arch=!alpha !armel !armhf !hurd-i386 !i386 !mipsel !powerpc !ppc64 !s390x)_ZNSt8_Rb_treeIPN5osgeo4proj9operation19CoordinateOperationESt4pairIKS4_St3setINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESt4lessISD_ESaISD_EEESt10_Select1stISI_ESE_IS4_ESaISI_EE29_M_get_insert_hint_unique_posESt23_Rb_tree_const_iteratorISI_ERS6_@Base 8.0.1
+ (optional=templinst|arch=loong64)_ZNSt8_Rb_treeIPN5osgeo4proj9operation19CoordinateOperationESt4pairIKS4_St3setINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESt4lessISD_ESaISD_EEESt10_Select1stISI_ESE_IS4_ESaISI_EE24_M_get_insert_unique_posERS6_@Base 9.3.0
+ (optional=templinst|arch=loong64)_ZNSt8_Rb_treeIPN5osgeo4proj9operation19CoordinateOperationESt4pairIKS4_St3setINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESt4lessISD_ESaISD_EEESt10_Select1stISI_ESE_IS4_ESaISI_EE29_M_get_insert_hint_unique_posESt23_Rb_tree_const_iteratorISI_ERS6_@Base 9.3.0
  (optional=templinst)_ZNSt8_Rb_treeISt4pairIN5osgeo4proj2io16AuthorityFactory10ObjectTypeENSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEES0_IKSC_NS6_4listIS0_ISB_SB_ESaISF_EEEESt10_Select1stISI_ESt4lessISC_ESaISI_EE24_M_get_insert_unique_posERSD_@Base 6.3.0
  (optional=templinst|arch=!alpha !armel !armhf !hurd-i386 !i386 !mipsel !powerpc !ppc64 !s390x)_ZNSt8_Rb_treeISt4pairIN5osgeo4proj2io16AuthorityFactory10ObjectTypeENSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEES0_IKSC_NS6_4listIS0_ISB_SB_ESaISF_EEEESt10_Select1stISI_ESt4lessISC_ESaISI_EE29_M_get_insert_hint_unique_posESt23_Rb_tree_const_iteratorISI_ERSD_@Base 6.3.0
  (optional=templinst)_ZNSt8_Rb_treeISt4pairINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEES6_ES7_St9_IdentityIS7_ESt4lessIS7_ESaIS7_EE24_M_get_insert_unique_posERKS7_@Base 7.0.0
  (optional=templinst)_ZNSt8_Rb_treeISt4pairINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEES6_ES7_St9_IdentityIS7_ESt4lessIS7_ESaIS7_EE4findERKS7_@Base 6.0.0
  (optional=templinst)_ZNSt8_Rb_treeISt4pairIiNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEES0_IKS7_S6_ESt10_Select1stIS9_ESt4lessIS7_ESaIS9_EE24_M_get_insert_unique_posERS8_@Base 7.0.0
  (optional=templinst|arch=!alpha !armel !armhf !hurd-i386 !i386 !mipsel !powerpc !ppc64 !s390x)_ZNSt8_Rb_treeISt4pairIiNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEES0_IKS7_S6_ESt10_Select1stIS9_ESt4lessIS7_ESaIS9_EE29_M_get_insert_hint_unique_posESt23_Rb_tree_const_iteratorIS9_ERS8_@Base 7.0.0
- (optional=templinst)_ZNSt8_Rb_treeIiSt4pairIKiNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEESt10_Select1stIS8_ESt4lessIiESaIS8_EE24_M_get_insert_unique_posERS1_@Base 8.1.0
- (optional=templinst|arch=!alpha !armel !armhf !hurd-i386 !i386 !mipsel !powerpc !ppc64 !s390x)_ZNSt8_Rb_treeIiSt4pairIKiNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEESt10_Select1stIS8_ESt4lessIiESaIS8_EE29_M_get_insert_hint_unique_posESt23_Rb_tree_const_iteratorIS8_ERS1_@Base 8.1.0
- (optional=templinst|arch=armel armhf m68k)_ZNSt8_Rb_treeIxxSt9_IdentityIxESt4lessIxESaIxEE4findERKx@Base 7.0.0
- (arch=!alpha !ia64 !mips64el !ppc64 !ppc64el !s390x)_ZNSt8__detail17_List_node_headerC1EOS0_@Base 9.2.0
- (arch=!alpha !ia64 !mips64el !ppc64 !ppc64el !s390x)_ZNSt8__detail17_List_node_headerC2EOS0_@Base 9.2.0
- (optional=templinst|arch=!alpha !amd64 !arm64 !ia64 !mips64el !ppc64 !ppc64el !riscv64 !s390x !sparc64)_ZNSt8__detail18__to_chars_10_implIjEEvPcjT_@Base 7.1.1
+ (optional=templinst|arch=loong64)_ZNSt8_Rb_treeIiSt4pairIKiNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEESt10_Select1stIS8_ESt4lessIiESaIS8_EE24_M_get_insert_unique_posERS1_@Base 9.3.0
+ (optional=templinst|arch=loong64)_ZNSt8_Rb_treeIiSt4pairIKiNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEESt10_Select1stIS8_ESt4lessIiESaIS8_EE29_M_get_insert_hint_unique_posESt23_Rb_tree_const_iteratorIS8_ERS1_@Base 9.3.0
+ _ZNSt8__detail17_List_node_headerC1EOS0_@Base 9.3.0
+ _ZNSt8__detail17_List_node_headerC2EOS0_@Base 9.3.0
+ (optional=templinst|arch=!alpha !amd64 !arm64 !ia64 !loong64 !mips64el !ppc64 !ppc64el !riscv64 !s390x !sparc64)_ZNSt8__detail18__to_chars_10_implIjEEvPcjT_@Base 7.1.1
  (optional=templinst)_ZSt16__do_uninit_copyIN9__gnu_cxx17__normal_iteratorIPKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESt6vectorIS7_SaIS7_EEEEPS7_ET0_T_SG_SF_@Base 9.1.0
  (optional=templinst)_ZSt16__do_uninit_copyIN9__gnu_cxx17__normal_iteratorIPKSt4pairINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEES8_ESt6vectorIS9_SaIS9_EEEEPS9_ET0_T_SI_SH_@Base 9.2.0
  (optional=templinst)_ZSt20dynamic_pointer_castIN5osgeo4proj3crs3CRSENS1_6common16IdentifiedObjectEESt10shared_ptrIT_ERKS6_IT0_E@Base 8.2.0
  (optional=templinst|arch=m68k)_ZSt4copyISt13_Bit_iteratorS0_ET0_T_S2_S1_@Base 7.1.1
- (optional=templinst|arch=amd64 arm64 hppa ia64 mips64el ppc64el riscv64 sh4 sparc64 x32)_ZStltINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEES5_EbRKSt4pairIT_T0_ESB_@Base 7.1.1
+ (optional=templinst)_ZSteqIcSt11char_traitsIcESaIcEEbRKNSt7__cxx1112basic_stringIT_T0_T1_EEPKS5_@Base 9.3.0
+ (optional=templinst)_ZSteqIcSt11char_traitsIcESaIcEEbRKNSt7__cxx1112basic_stringIT_T0_T1_EESA_@Base 9.3.0
+ (optional=templinst|arch=amd64 arm64 hppa ia64 loong64 mips64el ppc64el riscv64 sh4 sparc64 x32)_ZStltINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEES5_EbRKSt4pairIT_T0_ESB_@Base 7.1.1
  (optional=templinst|arch=!mipsel)_ZStplIcSt11char_traitsIcESaIcEENSt7__cxx1112basic_stringIT_T0_T1_EEOS8_S5_@Base 8.1.0
  (optional=templinst)_ZStplIcSt11char_traitsIcESaIcEENSt7__cxx1112basic_stringIT_T0_T1_EEOS8_S9_@Base 7.2.1
  (optional=templinst|arch=amd64 arm64 kfreebsd-amd64 x32)_ZStplIcSt11char_traitsIcESaIcEENSt7__cxx1112basic_stringIT_T0_T1_EEPKS5_OS8_@Base 6.0.0
- (optional=templinst)_ZStplIcSt11char_traitsIcESaIcEENSt7__cxx1112basic_stringIT_T0_T1_EEPKS5_RKS8_@Base 6.0.0
- (optional=templinst)_ZStplIcSt11char_traitsIcESaIcEENSt7__cxx1112basic_stringIT_T0_T1_EERKS8_PKS5_@Base 6.0.0
- (optional=templinst)_ZStplIcSt11char_traitsIcESaIcEENSt7__cxx1112basic_stringIT_T0_T1_EERKS8_SA_@Base 6.0.0
+ (optional=templinst|arch=loong64)_ZStplIcSt11char_traitsIcESaIcEENSt7__cxx1112basic_stringIT_T0_T1_EEPKS5_RKS8_@Base 9.3.0
+ (optional=templinst|arch=loong64)_ZStplIcSt11char_traitsIcESaIcEENSt7__cxx1112basic_stringIT_T0_T1_EERKS8_PKS5_@Base 9.3.0
+ (optional=templinst|arch=loong64)_ZStplIcSt11char_traitsIcESaIcEENSt7__cxx1112basic_stringIT_T0_T1_EERKS8_SA_@Base 9.3.0
  _ZTIN5osgeo4proj11coordinates18CoordinateMetadataE@Base 9.2.0
  _ZTIN5osgeo4proj16GenericShiftGridE@Base 7.0.0
  _ZTIN5osgeo4proj17VerticalShiftGridE@Base 7.0.0
@@ -2729,8 +2769,8 @@ libproj.so.25 #PACKAGE# #MINVER#
  (arch=armel riscv64)_ZTVSt23_Sp_counted_ptr_inplaceISt6vectorIhSaIhEESaIvELN9__gnu_cxx12_Lock_policyE1EE@Base 9.1.0
  (arch=!armel !riscv64)_ZTVSt23_Sp_counted_ptr_inplaceISt6vectorIhSaIhEESaIvELN9__gnu_cxx12_Lock_policyE2EE@Base 9.1.0
  _ZZNSt19_Sp_make_shared_tag5_S_tiEvE5__tag@Base 6.0.0
- (optional=templinst)_ZZNSt8__detail18__to_chars_10_implIjEEvPcjT_E8__digits@Base 7.1.1
- (optional=templinst|arch=alpha amd64 arm64 ia64 mips64el ppc64 ppc64el riscv64 s390x sparc64)_ZZNSt8__detail18__to_chars_10_implImEEvPcjT_E8__digits@Base 7.1.1
+ (optional=templinst|arch=loong64)_ZZNSt8__detail18__to_chars_10_implIjEEvPcjT_E8__digits@Base 9.3.0
+ (optional=templinst|arch=loong64)_ZZNSt8__detail18__to_chars_10_implImEEvPcjT_E8__digits@Base 9.3.0
  geod_direct@Base 4.9.0
  geod_directline@Base 4.9.3
  geod_gendirect@Base 4.9.0

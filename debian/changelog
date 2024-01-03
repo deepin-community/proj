@@ -1,14 +1,50 @@
-proj (9.2.1-2deepin1) unstable; urgency=medium
+proj (9.3.1-1) unstable; urgency=medium
 
-  * Change release to unstable.
+  * New upstream release.
+  * Update symbols for other architectures.
+  * Move from experimental to unstable.
 
- -- Chang Yang <yangchang@deepin.org>  Fri, 08 Sep 2023 16:57:00 +0800
+ -- Bas Couwenberg <sebastic@debian.org>  Fri, 01 Dec 2023 20:45:30 +0100
 
-proj (9.2.1-2) UNRELEASED; urgency=medium
+proj (9.3.1~rc1-1~exp1) experimental; urgency=medium
 
+  * New upstream release candidate.
+  * Don't ignore test failures on s390x.
+    https://github.com/OSGeo/PROJ/issues/3862#issuecomment-1807606954
+  * Update lintian overrides.
+  * Update symbols for amd64.
+
+ -- Bas Couwenberg <sebastic@debian.org>  Sun, 26 Nov 2023 18:08:49 +0100
+
+proj (9.3.0-1) unstable; urgency=medium
+
+  * New upstream release.
+  * Update symbols for other architectures.
+  * Strip pre-releases from symbols version.
+  * Move from experimental to unstable.
+
+ -- Bas Couwenberg <sebastic@debian.org>  Fri, 01 Sep 2023 11:17:47 +0200
+
+proj (9.3.0~rc2-1~exp1) experimental; urgency=medium
+
+  * New upstream release candidate.
+  * Ignore test failures on s390x.
+    https://github.com/OSGeo/PROJ/issues/3862#issuecomment-1695260886
+  * Switch to dh-sequence-*.
+  * Update symbols for other architectures.
+
+ -- Bas Couwenberg <sebastic@debian.org>  Wed, 30 Aug 2023 20:31:40 +0200
+
+proj (9.3.0~rc1-1~exp1) experimental; urgency=medium
+
+  * New upstream release candidate.
   * Bump debhelper compat to 13.
+  * Use execute_{before,after} instead of override in rules file.
+  * Enable Salsa CI.
+  * Update symbols for amd64.
+  * Update lintian overrides.
 
- -- Bas Couwenberg <sebastic@debian.org>  Tue, 13 Jun 2023 06:03:31 +0200
+ -- Bas Couwenberg <sebastic@debian.org>  Sun, 27 Aug 2023 21:14:05 +0200
 
 proj (9.2.1-1) unstable; urgency=medium
 

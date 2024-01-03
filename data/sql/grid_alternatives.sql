@@ -8,6 +8,9 @@ INSERT INTO grid_alternatives(original_grid_name,
                               url, direct_download, open_license, directory)
 VALUES
 
+-- ar_ign - Instituto Geográfico Nacional (IGN)
+('GEOIDE-Ar16.gri','ar_ign_GEOIDE-Ar16.tif',NULL,'GTiff','geoid_like',0,NULL,'https://cdn.proj.org/ar_ign_GEOIDE-Ar16.tif',1,1,NULL),
+
 -- at_bev - Austria Bundesamt für Eich- und Vermessungswessen
 ('AT_GIS_GRID.gsb','at_bev_AT_GIS_GRID.tif','AT_GIS_GRID.gsb','GTiff','hgridshift',0,NULL,'https://cdn.proj.org/at_bev_AT_GIS_GRID.tif',1,1,NULL),
 ('AT_GIS_GRID_2021_09_28.gsb','at_bev_AT_GIS_GRID_2021_09_28.tif',NULL,'GTiff','hgridshift',0,NULL,'https://cdn.proj.org/at_bev_AT_GIS_GRID_2021_09_28.tif',1,1,NULL),
@@ -46,11 +49,14 @@ VALUES
 -- ca_nrc - Natural Resources Canada
 ('CGG2013ai08.byn','ca_nrc_CGG2013ai08.tif','CGG2013ai08.gtx','GTiff','geoid_like',0,NULL,'https://cdn.proj.org/ca_nrc_CGG2013ai08.tif',1,1,NULL),
 ('CGG2013an83.byn','ca_nrc_CGG2013an83.tif','CGG2013an83.gtx','GTiff','geoid_like',0,NULL,'https://cdn.proj.org/ca_nrc_CGG2013an83.tif',1,1,NULL),
-('CGG2013i83.byn','ca_nrc_CGG2013i08.tif','CGG2013i08.gtx','GTiff','geoid_like',0,NULL,'https://cdn.proj.org/ca_nrc_CGG2013i08.tif',1,1,NULL),
+('CGG2013i08.byn','ca_nrc_CGG2013i08.tif','CGG2013i08.gtx','GTiff','geoid_like',0,NULL,'https://cdn.proj.org/ca_nrc_CGG2013i08.tif',1,1,NULL),
 ('CGG2013n83.byn','ca_nrc_CGG2013n83.tif','CGG2013n83.gtx','GTiff','geoid_like',0,NULL,'https://cdn.proj.org/ca_nrc_CGG2013n83.tif',1,1,NULL),
-('HT2_0.byn','ca_nrc_HT2_2010v70.tif','HT2_2010v70.gtx','GTiff','geoid_like',0,NULL,'https://cdn.proj.org/ca_nrc_HT2_2010v70.tif',1,1,NULL), -- deprecated name. dubious mapping !!!
-('HT2_1997.byn','ca_nrc_HT2_2010v70.tif',NULL,'GTiff','geoid_like',0,NULL,'https://cdn.proj.org/ca_nrc_HT2_2010v70.tif',1,1,NULL), -- dubious mapping !!!
+('HT2_0.byn','ca_nrc_HT2_1997.tif',NULL,'GTiff','geoid_like',0,NULL,'https://cdn.proj.org/ca_nrc_HT2_1997.tif',1,1,NULL),
+('HT2_1997.byn','ca_nrc_HT2_1997.tif',NULL,'GTiff','geoid_like',0,NULL,'https://cdn.proj.org/ca_nrc_HT2_1997.tif',1,1,NULL),
+('HT2_2002v70.byn','ca_nrc_HT2_2002v70.tif',NULL,'GTiff','geoid_like',0,NULL,'https://cdn.proj.org/ca_nrc_HT2_2002v70.tif',1,1,NULL),
 ('HT2_2010v70.byn','ca_nrc_HT2_2010v70.tif','HT2_2010v70.gtx','GTiff','geoid_like',0,NULL,'https://cdn.proj.org/ca_nrc_HT2_2010v70.tif',1,1,NULL),
+('HT2_1997_CGG2013a.byn','ca_nrc_HT2_1997_CGG2013a.tif',NULL,'GTiff','vgridshift',0,NULL,'https://cdn.proj.org/ca_nrc_HT2_1997_CGG2013a.tif',1,1,NULL),
+('HT2_2002v70_CGG2013a.byn','ca_nrc_HT2_2002v70_CGG2013a.tif',NULL,'GTiff','vgridshift',0,NULL,'https://cdn.proj.org/ca_nrc_HT2_2002v70_CGG2013a.tif',1,1,NULL),
 ('HT2_2010v70_CGG2013a.byn','ca_nrc_HT2_2010v70_CGG2013a.tif',NULL,'GTiff','vgridshift',0,NULL,'https://cdn.proj.org/ca_nrc_HT2_2010v70_CGG2013a.tif',1,1,NULL),
 -- the PROJ grid is the reverse way of the EPSG one
 ('NTv1_0.gsb','ca_nrc_ntv1_can.tif','ntv1_can.dat','GTiff','hgridshift',0,NULL,'https://cdn.proj.org/ca_nrc_ntv1_can.tif',1,1,NULL),
@@ -81,7 +87,7 @@ VALUES
 ('PE7783V2.gsb','ca_nrc_PE7783V2.tif','PE7783V2.GSB','GTiff','hgridshift',0,NULL,'https://cdn.proj.org/ca_nrc_PE7783V2.tif',1,1,NULL),
 ('SK27-98.gsb','ca_nrc_SK27-98.tif','SK27-98.GSB','GTiff','hgridshift',0,NULL,'https://cdn.proj.org/ca_nrc_SK27-98.tif',1,1,NULL),
 ('SK83-98.gsb','ca_nrc_SK83-98.tif','SK83-98.GSB','GTiff','hgridshift',0,NULL,'https://cdn.proj.org/ca_nrc_SK83-98.tif',1,1,NULL),
-('TOR27CSv1.GSB','ca_nrc_TO27CSv1.tif','TO27CSv1.GSB','GTiff','hgridshift',0,NULL,'https://cdn.proj.org/ca_nrc_TO27CSv1.tif',1,1,NULL),
+('TO27CSv1.GSB','ca_nrc_TO27CSv1.tif','TO27CSv1.GSB','GTiff','hgridshift',0,NULL,'https://cdn.proj.org/ca_nrc_TO27CSv1.tif',1,1,NULL),
 ('NAD83v6VG.gvb','ca_nrc_NAD83v6VG.tif',NULL,'GTiff','velocity_grid',0,NULL,'https://cdn.proj.org/ca_nrc_NAD83v6VG.tif',1,1,NULL),
 ('NAD83v70VG.gvb','ca_nrc_NAD83v70VG.tif',NULL,'GTiff','velocity_grid',0,NULL,'https://cdn.proj.org/ca_nrc_NAD83v70VG.tif',1,1,NULL),
 
@@ -98,6 +104,9 @@ VALUES
 
 -- de_adv - Arbeitsgemeinschaft der Vermessungsverwaltungender der Länder der Bundesrepublik Deutschland (AdV)
 ('BETA2007.gsb','de_adv_BETA2007.tif','BETA2007.gsb','GTiff','hgridshift',0,NULL,'https://cdn.proj.org/de_adv_BETA2007.tif',1,1,NULL),
+
+-- de_bkg - Bundesamt für Kartographie und Geodäsie (BKG)
+('GCG2016.txt','de_bkg_gcg2016.tif',NULL,'GTiff','geoid_like',0,NULL,'https://cdn.proj.org/de_bkg_gcg2016.tif',1,1,NULL),
 
 -- de_geosn - Staatsbetrieb Geobasisinformation und Vermessung Sachsen GeoSN
 ('NTv2_SN.gsb','de_geosn_NTv2_SN.tif','NTv2_SN.gsb','GTiff','hgridshift',0,NULL,'https://cdn.proj.org/de_geosn_NTv2_SN.tif',1,1,NULL),
@@ -281,6 +290,7 @@ VALUES
 -- pl_gugik - Główny Urząd Geodezji i Kartografii
 ('gugik-geoid2011-PL-EVRF2007-NH.txt','pl_gugik_geoid2011-PL-EVRF2007-NH.tif',NULL,'GTiff','geoid_like',0,NULL,'https://cdn.proj.org/pl_gugik_geoid2011-PL-EVRF2007-NH.tif',1,1,NULL),
 ('gugik-geoid2011-PL-KRON86-NH.txt','pl_gugik_geoid2011-PL-KRON86-NH.tif',NULL,'GTiff','geoid_like',0,NULL,'https://cdn.proj.org/pl_gugik_geoid2011-PL-KRON86-NH.tif',1,1,NULL),
+('Model_quasi-geoidy-PL-geoid2021-PL-EVRF2007-NH.txt','pl_gugik_geoid2021-PL-EVRF2007-NH.tif',NULL,'GTiff','geoid_like',0,NULL,'https://cdn.proj.org/pl_gugik_geoid2021-PL-EVRF2007-NH.tif',1,1,NULL),
 
 -- pt_dgt - DG Territorio
 ('DLx_ETRS89_geo.gsb','pt_dgt_DLx_ETRS89_geo.tif','DLx_ETRS89_geo.gsb','GTiff','hgridshift',0,NULL,'https://cdn.proj.org/pt_dgt_DLx_ETRS89_geo.tif',1,1,NULL),

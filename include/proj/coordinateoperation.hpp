@@ -38,6 +38,8 @@
 #include "io.hpp"
 #include "metadata.hpp"
 
+#include "proj.h"
+
 NS_PROJ_START
 
 namespace crs {
@@ -103,6 +105,45 @@ using CoordinateOperationPtr = std::shared_ptr<CoordinateOperation>;
 /** Non-null shared pointer of CoordinateOperation */
 using CoordinateOperationNNPtr = util::nn<CoordinateOperationPtr>;
 
+// ---------------------------------------------------------------------------
+
+class CoordinateTransformer;
+/** Shared pointer of CoordinateTransformer */
+using CoordinateTransformerPtr = std::unique_ptr<CoordinateTransformer>;
+/** Non-null shared pointer of CoordinateTransformer */
+using CoordinateTransformerNNPtr = util::nn<CoordinateTransformerPtr>;
+
+/** \brief Coordinate transformer.
+ *
+ * Performs coordinate transformation of coordinate tuplies.
+ *
+ * @since 9.3
+ */
+class PROJ_GCC_DLL CoordinateTransformer {
+  public:
+    //! @cond Doxygen_Suppress
+    PROJ_DLL ~CoordinateTransformer();
+    //! @endcond
+
+    PROJ_DLL PJ_COORD transform(PJ_COORD coord);
+
+  protected:
+    PROJ_FRIEND(CoordinateOperation);
+
+    PROJ_INTERNAL CoordinateTransformer();
+
+    PROJ_INTERNAL static CoordinateTransformerNNPtr
+    create(const CoordinateOperationNNPtr &op, PJ_CONTEXT *ctx);
+
+  private:
+    PROJ_OPAQUE_PRIVATE_DATA
+    INLINED_MAKE_UNIQUE
+    CoordinateTransformer &
+    operator=(const CoordinateTransformer &other) = delete;
+};
+
+// ---------------------------------------------------------------------------
+
 class Transformation;
 /** Shared pointer of Transformation */
 using TransformationPtr = std::shared_ptr<Transformation>;
@@ -151,7 +192,8 @@ class PROJ_GCC_DLL CoordinateOperation : public common::ObjectUsage,
     PROJ_DLL const util::optional<common::DataEpoch> &
     targetCoordinateEpoch() const;
 
-    // virtual void transform(...) = 0;  TODO
+    PROJ_DLL CoordinateTransformerNNPtr
+    coordinateTransformer(PJ_CONTEXT *ctx) const;
 
     /** \brief Return the inverse of the coordinate operation.
      * @throw util::UnsupportedOperationException
@@ -684,6 +726,10 @@ class PROJ_GCC_DLL SingleOperation : virtual public CoordinateOperation {
     createOperationParameterValueFromInterpolationCRS(int methodEPSGCode,
                                                       int crsEPSGCode);
 
+    PROJ_INTERNAL static void
+    exportToPROJStringChangeVerticalUnit(io::PROJStringFormatter *formatter,
+                                         double convFactor);
+
   private:
     PROJ_OPAQUE_PRIVATE_DATA
     SingleOperation &operator=(const SingleOperation &other) = delete;
@@ -1063,12 +1109,12 @@ class PROJ_GCC_DLL Conversion : public SingleOperation {
 
     PROJ_DLL static ConversionNNPtr
     createEquidistantConic(const util::PropertyMap &properties,
-                           const common::Angle &centerLat,
-                           const common::Angle &centerLong,
+                           const common::Angle &latitudeFalseOrigin,
+                           const common::Angle &longitudeFalseOrigin,
                            const common::Angle &latitudeFirstParallel,
                            const common::Angle &latitudeSecondParallel,
-                           const common::Length &falseEasting,
-                           const common::Length &falseNorthing);
+                           const common::Length &eastingFalseOrigin,
+                           const common::Length &northingFalseOrigin);
 
     PROJ_DLL static ConversionNNPtr
     createEckertI(const util::PropertyMap &properties,
@@ -1246,6 +1292,11 @@ class PROJ_GCC_DLL Conversion : public SingleOperation {
                            const common::Length &falseNorthing);
 
     PROJ_DLL static ConversionNNPtr createPopularVisualisationPseudoMercator(
+        const util::PropertyMap &properties, const common::Angle &centerLat,
+        const common::Angle &centerLong, const common::Length &falseEasting,
+        const common::Length &falseNorthing);
+
+    PROJ_DLL static ConversionNNPtr createMercatorSpherical(
         const util::PropertyMap &properties, const common::Angle &centerLat,
         const common::Angle &centerLong, const common::Length &falseEasting,
         const common::Length &falseNorthing);
@@ -1783,7 +1834,8 @@ class PROJ_GCC_DLL ConcatenatedOperation final : public CoordinateOperation {
     PROJ_INTERNAL static void
     fixStepsDirection(const crs::CRSNNPtr &concatOpSourceCRS,
                       const crs::CRSNNPtr &concatOpTargetCRS,
-                      std::vector<CoordinateOperationNNPtr> &operationsInOut);
+                      std::vector<CoordinateOperationNNPtr> &operationsInOut,
+                      const io::DatabaseContextPtr &dbContext);
     //! @endcond
 
   protected:
