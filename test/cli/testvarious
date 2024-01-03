@@ -120,6 +120,12 @@ $EXE +proj=utm +zone=11 +datum=WGS84 +pm=3 \
 500000 3000000
 EOF
 echo "##############################################################" >> ${OUT}
+echo Test input in grad >> ${OUT}
+#
+$EXE EPSG:4807 EPSG:27572 -E >>${OUT} <<EOF
+64.44444444 2.9586342556
+EOF
+echo "##############################################################" >> ${OUT}
 echo Test geocentric x/y/z generation. >> ${OUT}
 #
 $EXE +proj=latlong +datum=WGS84  \
@@ -1320,6 +1326,36 @@ $EXE -d 3 EPSG:25831 EPSG:23031 -E >>${OUT} 2>&1 <<EOF
 299905.060 4499796.515
 EOF
 
+echo "##############################################################" >> ${OUT}
+echo "Test Similarity Transformation through CompoundCRS" >> ${OUT}
+# Cf https://github.com/OSGeo/PROJ/issues/3854#issuecomment-1689964773
+#
+$EXE -d 3 EPSG:3912 EPSG:3794 -E >>${OUT} 2>&1 <<EOF
+477134.28 95134.21
+EOF
+
+$EXE -d 3 EPSG:3912+EPSG:5779 EPSG:3794+EPSG:8690 -E >>${OUT} 2>&1 <<EOF
+477134.28 95134.21 5
+EOF
+
+echo "##############################################################" >> ${OUT}
+echo "Test +proj=topocentric +datum=WGS84 +X_0=-3982059.42 +Y_0=3331314.88 +Z_0=3692463.58 +no_defs +type=crs +to EPSG:4978" >> ${OUT}
+#
+$EXE -d 3 +proj=topocentric +datum=WGS84 +X_0=-3982059.42 +Y_0=3331314.88 +Z_0=3692463.58 +no_defs +type=crs +to EPSG:4978 -E >>${OUT} 2>&1 <<EOF
+0 0 0
+EOF
+
+echo "##############################################################" >> ${OUT}
+echo "Test cs2cs EPSG:5488 (RGAF09) to EPSG:4559+5757 (RRAF 1991 / UTM zone 20N + Guadeloupe 1988 height)" >> ${OUT}
+echo "Check that we use the horizontal transformation for Guadeloupe (RRAF 1991 to RGAF09 (2)), and not the one for Martinique" >> ${OUT}
+#
+if test "${TIFF_ENABLED}" = "YES"; then
+PROJ_DATA=${PROJ_DATA}:${PROJ_DATA}/tests $EXE -d 3 EPSG:5488 EPSG:4559+5757 >> ${OUT} <<EOF
+16.248285304 -61.484212843 53.073
+EOF
+else
+printf "661991.318\t1796999.201 93.846\n" >> ${OUT}
+fi
 
 # Done!
 # do 'diff' with distribution results

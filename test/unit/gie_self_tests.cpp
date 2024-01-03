@@ -407,6 +407,7 @@ TEST(gie, info_functions) {
 
     proj_destroy(P);
 
+#ifdef TIFF_ENABLED
     /* proj_grid_info() */
     grid_info = proj_grid_info("tests/test_hgrid.tif");
     ASSERT_NE(std::string(grid_info.filename), "");
@@ -420,6 +421,7 @@ TEST(gie, info_functions) {
     EXPECT_NEAR(grid_info.lowerleft.phi, 0.90757121103705141, 1e-15);
     EXPECT_NEAR(grid_info.upperright.lam, 0.12217304763960307, 1e-15);
     EXPECT_NEAR(grid_info.upperright.phi, 0.95993108859688125, 1e-15);
+#endif
 
     grid_info = proj_grid_info("nonexistinggrid");
     ASSERT_EQ(std::string(grid_info.filename), "");
@@ -518,6 +520,100 @@ TEST(gie, info_functions) {
                   factors2.meridian_parallel_angle);
         EXPECT_EQ(factors.meridian_convergence, factors2.meridian_convergence);
         EXPECT_EQ(factors.tissot_semimajor, factors2.tissot_semimajor);
+
+        proj_destroy(P);
+    }
+
+    // Test with a projected CRS with feet unit
+    {
+        PJ_COORD c;
+        c.lp.lam = proj_torad(-110);
+        c.lp.phi = proj_torad(30);
+
+        P = proj_create(PJ_DEFAULT_CTX,
+                        "+proj=tmerc +lat_0=31 +lon_0=-110.166666666667 "
+                        "+k=0.9999 +x_0=213360 +y_0=0 +ellps=GRS80 +units=ft");
+        factors = proj_factors(P, c);
+        EXPECT_NEAR(factors.meridional_scale, 0.99990319, 1e-8)
+            << factors.meridional_scale;
+        EXPECT_NEAR(factors.parallel_scale, 0.99990319, 1e-8)
+            << factors.parallel_scale;
+        EXPECT_NEAR(factors.angular_distortion, 0, 1e-7)
+            << factors.angular_distortion;
+        EXPECT_NEAR(factors.meridian_parallel_angle, M_PI_2, 1e-7)
+            << factors.meridian_parallel_angle;
+        proj_destroy(P);
+
+        P = proj_create(PJ_DEFAULT_CTX, "EPSG:2222");
+
+        const auto factors2 = proj_factors(P, c);
+
+        EXPECT_NEAR(factors.meridional_scale, factors2.meridional_scale, 1e-10);
+        EXPECT_NEAR(factors.parallel_scale, factors2.parallel_scale, 1e-10);
+        EXPECT_NEAR(factors.angular_distortion, factors2.angular_distortion,
+                    1e-10);
+        EXPECT_NEAR(factors.meridian_parallel_angle,
+                    factors2.meridian_parallel_angle, 1e-109);
+
+        proj_destroy(P);
+    }
+
+    // Test with a projected CRS with northing, easting axis order
+    {
+        PJ_COORD c;
+        c.lp.lam = proj_torad(9);
+        c.lp.phi = proj_torad(0);
+
+        P = proj_create(PJ_DEFAULT_CTX, "+proj=utm +zone=32 +ellps=GRS80");
+        factors = proj_factors(P, c);
+        EXPECT_NEAR(factors.meridional_scale, 0.9996, 1e-8)
+            << factors.meridional_scale;
+        EXPECT_NEAR(factors.parallel_scale, 0.9996, 1e-8)
+            << factors.parallel_scale;
+        EXPECT_NEAR(factors.angular_distortion, 0, 1e-7)
+            << factors.angular_distortion;
+        EXPECT_NEAR(factors.meridian_parallel_angle, M_PI_2, 1e-7)
+            << factors.meridian_parallel_angle;
+        proj_destroy(P);
+
+        P = proj_create(PJ_DEFAULT_CTX, "EPSG:3044");
+
+        const auto factors2 = proj_factors(P, c);
+
+        EXPECT_NEAR(factors.meridional_scale, factors2.meridional_scale, 1e-10);
+        EXPECT_NEAR(factors.parallel_scale, factors2.parallel_scale, 1e-10);
+        EXPECT_NEAR(factors.angular_distortion, factors2.angular_distortion,
+                    1e-10);
+        EXPECT_NEAR(factors.meridian_parallel_angle,
+                    factors2.meridian_parallel_angle, 1e-109);
+
+        proj_destroy(P);
+    }
+
+    // Test with a projected CRS whose datum has a non-Greenwich prime meridian
+    {
+        P = proj_create(PJ_DEFAULT_CTX, "EPSG:27571");
+
+        PJ_COORD c;
+        c.lp.lam = proj_torad(0.0689738);
+        c.lp.phi = proj_torad(49.508567);
+        const auto factors2 = proj_factors(P, c);
+
+        EXPECT_NEAR(factors2.meridional_scale, 1 - 12.26478760 * 1e-5, 1e-8);
+
+        proj_destroy(P);
+    }
+
+    // Test with a compound CRS of a projected CRS
+    {
+        P = proj_create(PJ_DEFAULT_CTX, "EPSG:5972");
+
+        PJ_COORD c;
+        c.lp.lam = proj_torad(10.729030600);
+        c.lp.phi = proj_torad(59.916494500);
+        const auto factors2 = proj_factors(P, c);
+
+        EXPECT_NEAR(factors2.meridional_scale, 1 - 28.54587730 * 1e-5, 1e-8);
 
         proj_destroy(P);
     }

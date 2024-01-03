@@ -115,7 +115,7 @@ message(STATUS "Configuring PROJ:")
 #PROJ version information
 ################################################################################
 include(ProjVersion)
-proj_version(MAJOR 9 MINOR 2 PATCH 1)
+proj_version(MAJOR 9 MINOR 3 PATCH 1)
 set(PROJ_SOVERSION 25)
 set(PROJ_BUILD_VERSION "${PROJ_SOVERSION}.${PROJ_VERSION}")
 
@@ -292,7 +292,7 @@ include(ProjInstallPath)
 # By default GNUInstallDirs will use the upper case project name
 # for CMAKE_INSTALL_DOCDIR, resulting in something like share/doc/PROJ
 # instead of share/doc/proj which historically have been the path used
-# by the project. 
+# by the project.
 # Here force the use of a lower case project name and reset after
 # GNUInstallDirs has done its thing
 set(PROJECT_NAME_ORIGINAL "${PROJECT_NAME}")
@@ -327,6 +327,11 @@ add_subdirectory(man)
 add_subdirectory(cmake)
 if(BUILD_TESTING)
   add_subdirectory(test)
+endif()
+
+option(BUILD_EXAMPLES "Whether to build example programs" OFF)
+if(BUILD_EXAMPLES)
+  add_subdirectory(examples)
 endif()
 
 set(docfiles COPYING NEWS AUTHORS)
@@ -364,10 +369,10 @@ set(CPACK_SOURCE_IGNORE_FILES
   /autom4te\\.cache
   /CODE_OF_CONDUCT.md
   /CONTRIBUTING.md
+  /disabled_workflows/
   /Dockerfile
   /docs/
   /Doxyfile
-  /examples/
   /HOWTO-RELEASE
   /m4/lt*
   /m4/libtool*

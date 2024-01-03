@@ -1,8 +1,125 @@
+9.3.1 Release Notes
+-------------------
+
+ Updates
+ -------
+
+ o Update to EPSG 10.098 (#3968)
+
+ o Update ESRI objects to v3.2.0 (#3944)
+
+ Bug fixes
+ ---------
+
+ o ITRF2008: fix wrong sign for 'dry' parameter of EURA and EURA_T  (#3870)
+
+ o Fix build error with MSVC 2019 in /std:c++20 on NN_NO_CHECK() (#3872)
+
+ o  ESRI WKT import: normalize GCS_unknown to unknown and D_unknown to unknown (#3874)
+
+ o CoordinateOperationFactory: deal with CompoundToCompound with a horizontal similarity
+   transformation and a ballpark vertical (#3881)
+
+ o Ellipsoid::_isEquivalentTo(): fix so that an ellipsoid of semi-major axis A (and
+   non-zero inv flattening) isn't equivalent to a sphere of radius A (#3882)
+
+ o isEquivalentTo(): make a datum name 'unknown' equivalent to another one (#3883)
+
+ o cs2cs: fix handling of input coordinates in grad (#3886)
+
+ o Make setargv.obj available on Universal Windows Platform (#3891)
+
+ o Allow opening proj.db with a URI (#3892)
+
+ o createOperations(): fix GeogCRS 3D with TOWGS84 to geocentric CRS (#3915)
+
+ o Fix test suite so that it can pass with ENABLE_TIFF=OFF (#3916)
+
+ o GeographicBoundingBox::intersects(): avoid infinite recursion and stack overflow
+   on invalid bounding boxes (#3919)
+
+ o Fix importing '+proj=topocentric ... +type=crs' by using a geocentric CRS as
+   the base CRS (#3924)
+
+ o Allow LOCAL_CS with 3 axes (#3928)
+
+ o WKT1 parser: in non-strict mode, accept missing UNIT[] in GEOGCS, GEOCCS,
+   PROJCS and VERT_CS elements (#3933)
+
+ o createOperations(): fix issue with a obscure case involving CompoundCRS of
+   unknown horizontal datum + boundCRS of vertical (#3934)
+
+ o createOperations(): fix bad PROJ pipeline when converting between Geog3D
+   with non-metre height to CompoundCRS (#3943)
+
+ o createOperations(): Fix possible null dereference on invalid WKT input (#3946)
+
+ o proj_factor: fix when input is a compound CRS of a projected CRS (#3950)
+
+ o pj_get_suggested_operation(): tune it to give correct result for RGAF09 to
+   RRAF 1991 / UTM zone 20N + Guadeloupe 1988 height transformation (#3954)
+
+ o Move static NameSpace::GLOBAL definition in static.cpp to avoid
+  'static initialization fiasco' (#3956)
+
+ o horner: allow arbitrary input type of coordinate (#3961)
+
+
+9.3.0 Release Notes
+-------------------
+
+ Updates
+ -------
+
+ o Add C++ API to transform coordinate (#3705)
+
+ o CMake: add PROJ_DB_CACHE_DIR (#3711)
+
+ o Implement EPSG:1026 Mercator (Spherical) method (#3741)
+
+ o CMake: remove useless cross-compiling related checks (#3747)
+
+ o Add mapping of Equidistant Conic to new EPSG:1119 method (#3812)
+
+ o Implement proposal001 from Planetary DWG from OGC (#3816)
+
+ o Add option in proj CLI to use a CRS (#3825)
+
+ o proj_factors(): make it work with projected CRS with non-metre unit and/or
+   northing/easting axis order (#3826)
+
+ o PROJ_DEBUG: make ON an alias of 2, and OFF of 1 (#3835)
+
+ o Database: update to EPSG 10.094 (#3847)
+
+ Bug fixes
+ ---------
+
+ o GeographicBoundingBox::intersection(): avoid infinite recursion and stack
+   overflow on invalid bounding boxes (#3748)
+
+ o Various fixes related to concatenated operations (#3820)
+
+ o Projected CRS identification: fix crash when the base CRS is a
+   non-geographic geodetic CRS (#3830)
+
+ o Avoid C++ exceptions to be thrown (and caught) when parsing strings
+   like '+proj=longlat +datum=WGS84 +type=crs' (#3834)
+
+ o BUG: Handle prefix whitespace when guessing WKT dialiect (#3841)
+
+ o proj_alter_id(): make it replace an existing ID instead
+   of appending a new one (#3846)
+
+ o bonne: fix inverse map projection computations when lat_1 < 0 (#3849)
+
+ o WKT1 ESRI import/export: fix GCS name for EPSG:8353 S-JTSK_[JTSK03]_Krovak_East_North (#3851)
+
 9.2.1 Release Notes
 -------------------
 
  Database updates
- --------
+ ----------------
 
  o Add alias for old ESRI datum/CRS names of EPSG:8353
    S_JTSK_JTSK03_Krovak_East_North (#3678)
@@ -36,7 +153,7 @@
 
  o  CMake: avoid imbalanced cmake_policy push/pop if TIFF or CURL dependency
     cannot be found (#3697)
- 
+
  o  proj_create_crs_to_crs(): restore transformation selection behaviour
     of PROJ 9.1 when grids are missing (#3707)
 
@@ -51,7 +168,7 @@
     in ONLY_BEST=YES mode (#3730)
 
  o  tinshift: raise maximum size of JSON file to 100 MB (#3736)
- 
+
 
 
 9.2.0 Release Notes

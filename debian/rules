@@ -26,12 +26,11 @@ datumgrids-stamp:
 
 %:
 	if [ "$@" != "datumgrids" -a "$@" != "datumgrids-stamp" ]; then \
-		dh $@ --with pkgkde_symbolshelper ; \
+		dh $@ ; \
 	fi
 
-override_dh_auto_clean:
+execute_before_dh_auto_clean:
 	( cd $(CURDIR)/data && cat $(CURDIR)/debian/datumgrids.list $(CURDIR)/debian/datumgrids-ch.list | xargs rm -f )
-	dh_auto_clean
 
 override_dh_auto_configure: datumgrids
 	dh_auto_configure -- -DCMAKE_BUILD_RPATH_USE_ORIGIN=ON \
@@ -45,9 +44,7 @@ else
 	dh_auto_test
 endif
 
-override_dh_auto_install:
-	dh_auto_install
-	
+execute_after_dh_auto_install:
 	# Explicitly remove files
 	$(RM) $(CURDIR)/debian/*/usr/share/doc/proj/AUTHORS
 	$(RM) $(CURDIR)/debian/*/usr/share/doc/proj/COPYING

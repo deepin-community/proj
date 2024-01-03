@@ -697,9 +697,10 @@ TEST(crs, EPSG_4807_as_WKT1_ESRI_with_database) {
     WKTFormatterNNPtr f(WKTFormatter::create(
         WKTFormatter::Convention::WKT1_ESRI, DatabaseContext::create()));
     EXPECT_EQ(crs->exportToWKT(f.get()),
-              "GEOGCS[\"GCS_NTF_Paris\",DATUM[\"D_NTF\",SPHEROID[\"Clarke_1880_"
-              "IGN\",6378249.2,293.466021293627]],PRIMEM[\"Paris\",2.33722917],"
-              "UNIT[\"Grad\",0.015707963267949]]");
+              "GEOGCS[\"GCS_NTF_Paris\","
+              "DATUM[\"Nouvelle_Triangulation_Francaise_(Paris)\","
+              "SPHEROID[\"Clarke_1880_IGN\",6378249.2,293.466021293627]],"
+              "PRIMEM[\"Paris\",2.33722917],UNIT[\"Grad\",0.015707963267949]]");
 }
 
 // ---------------------------------------------------------------------------
@@ -993,20 +994,20 @@ TEST(crs, EPSG_27561_projected_with_geodetic_in_grad_as_PROJ_string_and_WKT1) {
         WKTFormatter::create(WKTFormatter::Convention::WKT1_ESRI,
                              DatabaseContext::create())
             .get());
-    EXPECT_EQ(
-        wkt1_esri,
-        "PROJCS[\"NTF_Paris_Lambert_Nord_France\",GEOGCS[\"GCS_NTF_Paris\","
-        "DATUM[\"D_NTF\",SPHEROID[\"Clarke_1880_IGN\",6378249.2,"
-        "293.4660213]],PRIMEM[\"Paris\",2.33722917000759],"
-        "UNIT[\"Grad\",0.015707963268]],"
-        "PROJECTION[\"Lambert_Conformal_Conic\"],"
-        "PARAMETER[\"False_Easting\",600000.0],"
-        "PARAMETER[\"False_Northing\",200000.0],"
-        "PARAMETER[\"Central_Meridian\",0.0],"
-        "PARAMETER[\"Standard_Parallel_1\",55.0],"
-        "PARAMETER[\"Scale_Factor\",0.999877341],"
-        "PARAMETER[\"Latitude_Of_Origin\",55.0],"
-        "UNIT[\"Meter\",1.0]]");
+    EXPECT_EQ(wkt1_esri, "PROJCS[\"NTF_Paris_Lambert_Nord_France\","
+                         "GEOGCS[\"GCS_NTF_Paris\","
+                         "DATUM[\"Nouvelle_Triangulation_Francaise_(Paris)\","
+                         "SPHEROID[\"Clarke_1880_IGN\",6378249.2,293.4660213]],"
+                         "PRIMEM[\"Paris\",2.33722917000759],"
+                         "UNIT[\"Grad\",0.015707963268]],"
+                         "PROJECTION[\"Lambert_Conformal_Conic\"],"
+                         "PARAMETER[\"False_Easting\",600000.0],"
+                         "PARAMETER[\"False_Northing\",200000.0],"
+                         "PARAMETER[\"Central_Meridian\",0.0],"
+                         "PARAMETER[\"Standard_Parallel_1\",55.0],"
+                         "PARAMETER[\"Scale_Factor\",0.999877341],"
+                         "PARAMETER[\"Latitude_Of_Origin\",55.0],"
+                         "UNIT[\"Meter\",1.0]]");
 }
 
 // ---------------------------------------------------------------------------
@@ -2407,6 +2408,121 @@ TEST(crs, projectedCRS_from_WKT1_ESRI_as_WKT1_ESRI) {
 
 // ---------------------------------------------------------------------------
 
+TEST(crs, projectedCRS_from_WKT1_ESRI_as_WKT1_ESRI_s_jtsk03_krovak_east_north) {
+    // EPSG:8353
+    auto wkt = "PROJCS[\"S-JTSK_[JTSK03]_Krovak_East_North\","
+               "GEOGCS[\"S-JTSK_[JTSK03]\",DATUM[\"S-JTSK_[JTSK03]\","
+               "SPHEROID[\"Bessel_1841\",6377397.155,299.1528128]],"
+               "PRIMEM[\"Greenwich\",0.0],UNIT[\"Degree\",0.0174532925199433]],"
+               "PROJECTION[\"Krovak\"],"
+               "PARAMETER[\"False_Easting\",0.0],"
+               "PARAMETER[\"False_Northing\",0.0],"
+               "PARAMETER[\"Pseudo_Standard_Parallel_1\",78.5],"
+               "PARAMETER[\"Scale_Factor\",0.9999],"
+               "PARAMETER[\"Azimuth\",30.2881397527778],"
+               "PARAMETER[\"Longitude_Of_Center\",24.8333333333333],"
+               "PARAMETER[\"Latitude_Of_Center\",49.5],"
+               "PARAMETER[\"X_Scale\",-1.0],"
+               "PARAMETER[\"Y_Scale\",1.0],"
+               "PARAMETER[\"XY_Plane_Rotation\",90.0],"
+               "UNIT[\"Meter\",1.0]]";
+
+    auto dbContext = DatabaseContext::create();
+    auto obj = WKTParser().attachDatabaseContext(dbContext).createFromWKT(wkt);
+    auto crs = nn_dynamic_pointer_cast<ProjectedCRS>(obj);
+    ASSERT_TRUE(crs != nullptr);
+
+    auto expected_wkt2 =
+        "PROJCRS[\"S-JTSK [JTSK03] / Krovak East North\",\n"
+        "    BASEGEOGCRS[\"S-JTSK [JTSK03]\",\n"
+        "        DATUM[\"System of the Unified Trigonometrical Cadastral "
+        "Network [JTSK03]\",\n"
+        "            ELLIPSOID[\"Bessel 1841\",6377397.155,299.1528128,\n"
+        "                LENGTHUNIT[\"metre\",1]],\n"
+        "            ID[\"EPSG\",1201]],\n"
+        "        PRIMEM[\"Greenwich\",0,\n"
+        "            ANGLEUNIT[\"Degree\",0.0174532925199433]]],\n"
+        "    CONVERSION[\"unnamed\",\n"
+        "        METHOD[\"Krovak (North Orientated)\",\n"
+        "            ID[\"EPSG\",1041]],\n"
+        "        PARAMETER[\"Latitude of projection centre\",49.5,\n"
+        "            ANGLEUNIT[\"Degree\",0.0174532925199433],\n"
+        "            ID[\"EPSG\",8811]],\n"
+        "        PARAMETER[\"Longitude of origin\",24.8333333333333,\n"
+        "            ANGLEUNIT[\"Degree\",0.0174532925199433],\n"
+        "            ID[\"EPSG\",8833]],\n"
+        "        PARAMETER[\"Co-latitude of cone axis\",30.2881397527778,\n"
+        "            ANGLEUNIT[\"Degree\",0.0174532925199433],\n"
+        "            ID[\"EPSG\",1036]],\n"
+        "        PARAMETER[\"Latitude of pseudo standard parallel\",78.5,\n"
+        "            ANGLEUNIT[\"Degree\",0.0174532925199433],\n"
+        "            ID[\"EPSG\",8818]],\n"
+        "        PARAMETER[\"Scale factor on pseudo standard "
+        "parallel\",0.9999,\n"
+        "            SCALEUNIT[\"unity\",1],\n"
+        "            ID[\"EPSG\",8819]],\n"
+        "        PARAMETER[\"False easting\",0,\n"
+        "            LENGTHUNIT[\"metre\",1],\n"
+        "            ID[\"EPSG\",8806]],\n"
+        "        PARAMETER[\"False northing\",0,\n"
+        "            LENGTHUNIT[\"metre\",1],\n"
+        "            ID[\"EPSG\",8807]]],\n"
+        "    CS[Cartesian,2],\n"
+        "        AXIS[\"(E)\",east,\n"
+        "            ORDER[1],\n"
+        "            LENGTHUNIT[\"metre\",1,\n"
+        "                ID[\"EPSG\",9001]]],\n"
+        "        AXIS[\"(N)\",north,\n"
+        "            ORDER[2],\n"
+        "            LENGTHUNIT[\"metre\",1,\n"
+        "                ID[\"EPSG\",9001]]]]";
+
+    EXPECT_EQ(
+        crs->exportToWKT(
+            WKTFormatter::create(WKTFormatter::Convention::WKT2_2019, dbContext)
+                .get()),
+        expected_wkt2);
+
+    EXPECT_EQ(
+        crs->exportToWKT(
+            WKTFormatter::create(WKTFormatter::Convention::WKT1_ESRI, dbContext)
+                .get()),
+        wkt);
+}
+
+// ---------------------------------------------------------------------------
+
+TEST(crs, projectedCRS_from_EPSG_as_WKT1_ESRI_s_jtsk03_krovak_east_north) {
+    auto dbContext = DatabaseContext::create();
+    auto factoryEPSG = AuthorityFactory::create(dbContext, "EPSG");
+    auto crs = factoryEPSG->createProjectedCRS("8353");
+
+    auto wkt = "PROJCS[\"S-JTSK_[JTSK03]_Krovak_East_North\","
+               "GEOGCS[\"S-JTSK_[JTSK03]\",DATUM[\"S-JTSK_[JTSK03]\","
+               "SPHEROID[\"Bessel_1841\",6377397.155,299.1528128]],"
+               "PRIMEM[\"Greenwich\",0.0],UNIT[\"Degree\",0.0174532925199433]],"
+               "PROJECTION[\"Krovak\"],"
+               "PARAMETER[\"False_Easting\",0.0],"
+               "PARAMETER[\"False_Northing\",0.0],"
+               "PARAMETER[\"Pseudo_Standard_Parallel_1\",78.5],"
+               "PARAMETER[\"Scale_Factor\",0.9999],"
+               "PARAMETER[\"Azimuth\",30.2881397527778],"
+               "PARAMETER[\"Longitude_Of_Center\",24.8333333333333],"
+               "PARAMETER[\"Latitude_Of_Center\",49.5],"
+               "PARAMETER[\"X_Scale\",-1.0],"
+               "PARAMETER[\"Y_Scale\",1.0],"
+               "PARAMETER[\"XY_Plane_Rotation\",90.0],"
+               "UNIT[\"Meter\",1.0]]";
+
+    EXPECT_EQ(
+        crs->exportToWKT(
+            WKTFormatter::create(WKTFormatter::Convention::WKT1_ESRI, dbContext)
+                .get()),
+        wkt);
+}
+
+// ---------------------------------------------------------------------------
+
 TEST(crs, projectedCRS_as_PROJ_string) {
     auto crs = createProjected();
 
@@ -3304,6 +3420,53 @@ TEST(crs, projectedCRS_identify_db) {
         ASSERT_GE(res.size(), 1U);
         EXPECT_EQ(res.front().first->getEPSGCode(), 25832);
         EXPECT_EQ(res.front().second, 70);
+    }
+    {
+        // Identify a projected CRS whose base CRS is not a geographic CRS but
+        // a geodetic CRS with a spherical -ocentric coordinate system.
+        // Cf https://github.com/OSGeo/PROJ/issues/3828
+        auto obj = WKTParser().attachDatabaseContext(dbContext).createFromWKT(
+            "PROJCRS[\"unknown\",\n"
+            "    BASEGEODCRS[\"Mercury (2015) / Ocentric\",\n"
+            "        DATUM[\"Mercury (2015)\",\n"
+            "            ELLIPSOID[\"Mercury "
+            "(2015)\",2440530,1075.12334801762,\n"
+            "                LENGTHUNIT[\"metre\",1]],\n"
+            "            ANCHOR[\"Hun Kal: 20 W.0\"]],\n"
+            "        PRIMEM[\"Reference Meridian\",0,\n"
+            "            ANGLEUNIT[\"degree\",0.0174532925199433]],\n"
+            "        ID[\"IAU\",19902,2015]],\n"
+            "    CONVERSION[\"Equirectangular, clon = 0\",\n"
+            "        METHOD[\"Equidistant Cylindrical\",\n"
+            "            ID[\"EPSG\",1028]],\n"
+            "        PARAMETER[\"Latitude of 1st standard parallel\",0,\n"
+            "            ANGLEUNIT[\"degree\",0.0174532925199433],\n"
+            "            ID[\"EPSG\",8823]],\n"
+            "        PARAMETER[\"Longitude of natural origin\",0,\n"
+            "            ANGLEUNIT[\"degree\",0.0174532925199433],\n"
+            "            ID[\"EPSG\",8802]],\n"
+            "        PARAMETER[\"False easting\",0,\n"
+            "            LENGTHUNIT[\"metre\",1],\n"
+            "            ID[\"EPSG\",8806]],\n"
+            "        PARAMETER[\"False northing\",0,\n"
+            "            LENGTHUNIT[\"metre\",1],\n"
+            "            ID[\"EPSG\",8807]]],\n"
+            "    CS[Cartesian,2],\n"
+            "        AXIS[\"(E)\",east,\n"
+            "            ORDER[1],\n"
+            "            LENGTHUNIT[\"metre\",1]],\n"
+            "        AXIS[\"(N)\",north,\n"
+            "            ORDER[2],\n"
+            "            LENGTHUNIT[\"metre\",1]]]");
+        auto crs = nn_dynamic_pointer_cast<ProjectedCRS>(obj);
+        ASSERT_TRUE(crs != nullptr);
+        auto allFactory = AuthorityFactory::create(dbContext, std::string());
+        auto res = crs->identify(allFactory);
+        ASSERT_GE(res.size(), 1U);
+        EXPECT_EQ(res.front().first->identifiers()[0]->code(), "19912");
+        EXPECT_EQ(*(res.front().first->identifiers()[0]->codeSpace()),
+                  "IAU_2015");
+        EXPECT_EQ(res.front().second, 90);
     }
 }
 

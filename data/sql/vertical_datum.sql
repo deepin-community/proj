@@ -10,8 +10,8 @@ INSERT INTO "vertical_datum" VALUES('EPSG','1039','New Zealand Vertical Datum 20
 INSERT INTO "usage" VALUES('EPSG','13091','vertical_datum','EPSG','1039','EPSG','1175','EPSG','1178');
 INSERT INTO "vertical_datum" VALUES('EPSG','1040','Dunedin-Bluff 1960',NULL,'1960-01-01',NULL,NULL,NULL,0);
 INSERT INTO "usage" VALUES('EPSG','13092','vertical_datum','EPSG','1040','EPSG','3806','EPSG','1178');
-INSERT INTO "vertical_datum" VALUES('EPSG','1049','Incheon',NULL,'1963-01-01',NULL,NULL,NULL,0);
-INSERT INTO "usage" VALUES('EPSG','13101','vertical_datum','EPSG','1049','EPSG','3739','EPSG','1180');
+INSERT INTO "vertical_datum" VALUES('EPSG','1049','Korean Vertical Datum 1964',NULL,'1963-01-01',NULL,NULL,NULL,0);
+INSERT INTO "usage" VALUES('EPSG','13101','vertical_datum','EPSG','1049','EPSG','3266','EPSG','1180');
 INSERT INTO "vertical_datum" VALUES('EPSG','1050','Trieste',NULL,'1875-01-01',NULL,NULL,NULL,0);
 INSERT INTO "usage" VALUES('EPSG','13102','vertical_datum','EPSG','1050','EPSG','2370','EPSG','1178');
 INSERT INTO "vertical_datum" VALUES('EPSG','1051','Genoa 1942',NULL,'1942-01-01',NULL,NULL,NULL,0);
@@ -58,9 +58,9 @@ INSERT INTO "vertical_datum" VALUES('EPSG','1098','Little Cayman Vertical Datum 
 INSERT INTO "usage" VALUES('EPSG','13150','vertical_datum','EPSG','1098','EPSG','4121','EPSG','1180');
 INSERT INTO "vertical_datum" VALUES('EPSG','1099','Cayman Brac Vertical Datum 1961',NULL,'1961-01-01',NULL,NULL,NULL,0);
 INSERT INTO "usage" VALUES('EPSG','13151','vertical_datum','EPSG','1099','EPSG','3207','EPSG','1180');
-INSERT INTO "vertical_datum" VALUES('EPSG','1101','Cais da Pontinha - Funchal',NULL,'1913-01-01',NULL,NULL,NULL,0);
+INSERT INTO "vertical_datum" VALUES('EPSG','1101','Cais da Pontinha',NULL,'1913-01-01',NULL,NULL,NULL,0);
 INSERT INTO "usage" VALUES('EPSG','13153','vertical_datum','EPSG','1101','EPSG','4125','EPSG','1178');
-INSERT INTO "vertical_datum" VALUES('EPSG','1102','Cais da Vila - Porto Santo',NULL,'1936-01-01',NULL,NULL,NULL,0);
+INSERT INTO "vertical_datum" VALUES('EPSG','1102','Cais da Vila',NULL,'1936-01-01',NULL,NULL,NULL,0);
 INSERT INTO "usage" VALUES('EPSG','13154','vertical_datum','EPSG','1102','EPSG','3680','EPSG','1178');
 INSERT INTO "vertical_datum" VALUES('EPSG','1103','Cais das Velas',NULL,'1937-01-01',NULL,NULL,NULL,0);
 INSERT INTO "usage" VALUES('EPSG','13155','vertical_datum','EPSG','1103','EPSG','2875','EPSG','1178');
@@ -70,7 +70,7 @@ INSERT INTO "vertical_datum" VALUES('EPSG','1105','Cais da Madalena',NULL,'1937-
 INSERT INTO "usage" VALUES('EPSG','13157','vertical_datum','EPSG','1105','EPSG','2874','EPSG','1178');
 INSERT INTO "vertical_datum" VALUES('EPSG','1106','Santa Cruz da Graciosa',NULL,'1938-01-01',NULL,NULL,NULL,0);
 INSERT INTO "usage" VALUES('EPSG','13158','vertical_datum','EPSG','1106','EPSG','3681','EPSG','1178');
-INSERT INTO "vertical_datum" VALUES('EPSG','1107','Cais da Figueirinha - Angra do Heroismo',NULL,'1951-01-01',NULL,NULL,NULL,0);
+INSERT INTO "vertical_datum" VALUES('EPSG','1107','Cais da Figueirinha',NULL,'1951-01-01',NULL,NULL,NULL,0);
 INSERT INTO "usage" VALUES('EPSG','13159','vertical_datum','EPSG','1107','EPSG','2872','EPSG','1178');
 INSERT INTO "vertical_datum" VALUES('EPSG','1108','Santa Cruz das Flores',NULL,'1965-01-01',NULL,NULL,NULL,0);
 INSERT INTO "usage" VALUES('EPSG','13160','vertical_datum','EPSG','1108','EPSG','1344','EPSG','1178');
@@ -175,7 +175,7 @@ INSERT INTO "usage" VALUES('EPSG','13981','vertical_datum','EPSG','1267','EPSG',
 INSERT INTO "vertical_datum" VALUES('EPSG','1269','Kingdom of Saudi Arabia Vertical Reference Frame Jeddah 2014',NULL,'2014-10-01',NULL,NULL,NULL,0);
 INSERT INTO "usage" VALUES('EPSG','13897','vertical_datum','EPSG','1269','EPSG','3303','EPSG','1181');
 INSERT INTO "vertical_datum" VALUES('EPSG','1270','Mean Sea Level Netherlands',NULL,NULL,NULL,NULL,NULL,0);
-INSERT INTO "usage" VALUES('EPSG','14119','vertical_datum','EPSG','1270','EPSG','1630','EPSG','1265');
+INSERT INTO "usage" VALUES('EPSG','14119','vertical_datum','EPSG','1270','EPSG','4742','EPSG','1265');
 INSERT INTO "vertical_datum" VALUES('EPSG','1274','European Vertical Reference Frame 2019',NULL,'2020-09-01',NULL,NULL,NULL,0);
 INSERT INTO "usage" VALUES('EPSG','14738','vertical_datum','EPSG','1274','EPSG','4608','EPSG','1261');
 INSERT INTO "vertical_datum" VALUES('EPSG','1275','Mallorca',NULL,NULL,NULL,NULL,NULL,0);
@@ -203,7 +203,7 @@ INSERT INTO "usage" VALUES('EPSG','14024','vertical_datum','EPSG','1285','EPSG',
 INSERT INTO "vertical_datum" VALUES('EPSG','1287','European Vertical Reference Frame 2019 mean tide',NULL,'2020-09-01',NULL,NULL,NULL,0);
 INSERT INTO "usage" VALUES('EPSG','14739','vertical_datum','EPSG','1287','EPSG','4608','EPSG','1262');
 INSERT INTO "vertical_datum" VALUES('EPSG','1290','Lowest Astronomical Tide Netherlands',NULL,NULL,NULL,NULL,NULL,0);
-INSERT INTO "usage" VALUES('EPSG','14120','vertical_datum','EPSG','1290','EPSG','1630','EPSG','1198');
+INSERT INTO "usage" VALUES('EPSG','14120','vertical_datum','EPSG','1290','EPSG','4742','EPSG','1198');
 INSERT INTO "vertical_datum" VALUES('EPSG','1292','Australian Vertical Working Surface',NULL,'2020-07-14',NULL,NULL,NULL,0);
 INSERT INTO "usage" VALUES('EPSG','14134','vertical_datum','EPSG','1292','EPSG','4177','EPSG','1264');
 INSERT INTO "vertical_datum" VALUES('EPSG','1294','Indonesian Geoid 2020 version 1',NULL,'2020-06-01',NULL,NULL,NULL,0);
@@ -246,6 +246,14 @@ INSERT INTO "vertical_datum" VALUES('EPSG','1331','Chart Datum UK & Ireland VORF
 INSERT INTO "usage" VALUES('EPSG','18581','vertical_datum','EPSG','1331','EPSG','4668','EPSG','1198');
 INSERT INTO "vertical_datum" VALUES('EPSG','1354','Nivellement General de l''Algerie 2022',NULL,'2022-11-30',NULL,NULL,NULL,0);
 INSERT INTO "usage" VALUES('EPSG','19359','vertical_datum','EPSG','1354','EPSG','3213','EPSG','1026');
+INSERT INTO "vertical_datum" VALUES('EPSG','1361','Chart Datum Portugal ',NULL,NULL,NULL,NULL,NULL,0);
+INSERT INTO "usage" VALUES('EPSG','20092','vertical_datum','EPSG','1361','EPSG','4738','EPSG','1198');
+INSERT INTO "vertical_datum" VALUES('EPSG','1362','Formentera',NULL,NULL,NULL,NULL,NULL,0);
+INSERT INTO "usage" VALUES('EPSG','19908','vertical_datum','EPSG','1362','EPSG','4739','EPSG','1178');
+INSERT INTO "vertical_datum" VALUES('EPSG','1363','Alboran',NULL,NULL,NULL,NULL,NULL,0);
+INSERT INTO "usage" VALUES('EPSG','19909','vertical_datum','EPSG','1363','EPSG','4741','EPSG','1178');
+INSERT INTO "vertical_datum" VALUES('EPSG','1364','Melilla',NULL,NULL,NULL,NULL,NULL,0);
+INSERT INTO "usage" VALUES('EPSG','19910','vertical_datum','EPSG','1364','EPSG','4740','EPSG','1178');
 INSERT INTO "vertical_datum" VALUES('EPSG','5100','Mean Sea Level',NULL,NULL,NULL,NULL,NULL,0);
 INSERT INTO "usage" VALUES('EPSG','13307','vertical_datum','EPSG','5100','EPSG','1262','EPSG','1199');
 INSERT INTO "vertical_datum" VALUES('EPSG','5101','Ordnance Datum Newlyn',NULL,'1956-01-01',NULL,NULL,NULL,0);

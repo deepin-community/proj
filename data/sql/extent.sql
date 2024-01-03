@@ -472,7 +472,7 @@ INSERT INTO "extent" VALUES('EPSG','1492','Yemen - South Yemen - mainland west o
 INSERT INTO "extent" VALUES('EPSG','1493','Yemen - South Yemen - mainland east of 48°E','Yemen - South Yemen onshore mainland east of 48°E.',13.94,19.0,48.0,53.14,0);
 INSERT INTO "extent" VALUES('EPSG','1494','Vietnam - onshore Vung Tau area','Vietnam - onshore Vung Tau area.',9.03,11.04,105.49,107.58,0);
 INSERT INTO "extent" VALUES('EPSG','1495','Vietnam - offshore Cuu Long basin','Vietnam - offshore - Cuu Long basin and northwestern part of Nam Con Son basin.',7.99,11.15,106.54,110.0,0);
-INSERT INTO "extent" VALUES('EPSG','1496','Korea, Republic of (South Korea) - east of 128°E onshore','Republic of Korea (South Korea) - onshore east of 128°E.',34.49,38.64,128.0,129.65,0);
+INSERT INTO "extent" VALUES('EPSG','1496','Korea, Republic of (South Korea) - 128°E to 130°E onshore','Republic of Korea (South Korea) - onshore between 128°E and 130°E.',34.49,38.64,128.0,129.65,0);
 INSERT INTO "extent" VALUES('EPSG','1497','Korea, Republic of (South Korea) - 126°E to 128°E onshore','Republic of Korea (South Korea) - onshore between 126°E and 128°E.',33.14,38.33,126.0,128.0,0);
 INSERT INTO "extent" VALUES('EPSG','1498','Korea, Republic of (South Korea) - 124°E to 126°E onshore','Republic of Korea (South Korea) - onshore between 124°E and 126°E.',33.99,38.04,124.53,126.0,0);
 INSERT INTO "extent" VALUES('EPSG','1499','Venezuela - Maracaibo - blocks I II and III','Venezuela - Maracaibo area offshore blocks I, II and III.',10.0,10.51,-71.5,-71.17,0);
@@ -1032,7 +1032,7 @@ INSERT INTO "extent" VALUES('EPSG','2052','World - N hemisphere - 24°W to 18°W
 INSERT INTO "extent" VALUES('EPSG','2053','World - S hemisphere - 24°W to 18°W - by country','Between 24°W and 18°W, southern hemisphere between 80°S and equator, onshore and offshore.',-80.0,0.0,-24.0,-18.0,0);
 INSERT INTO "extent" VALUES('EPSG','2054','World - N hemisphere - 18°W to 12°W - by country','Between 18°W and 12°W, northern hemisphere between equator and 84°N, onshore and offshore. Gambia. Greenland. Guinea. Guinea-Bissau. Iceland. Ireland - offshore Porcupine Basin. Mauritania. Morocco. Senegal. Sierra Leone. Western Sahara.',0.0,84.0,-18.0,-12.0,0);
 INSERT INTO "extent" VALUES('EPSG','2055','World - S hemisphere - 18°W to 12°W - by country','Between 18°W and 12°W, southern hemisphere between 80°S and equator, onshore and offshore.',-80.0,0.0,-18.0,-12.0,0);
-INSERT INTO "extent" VALUES('EPSG','2056','World - N hemisphere - 12°W to 6°W - by country','Between 12°W and 6°W, northern hemisphere between equator and 84°N, onshore and offshore. Algeria. Côte D''Ivoire (Ivory Coast). Faroe Islands. Guinea. Ireland. Jan Mayen. Mali. Mauritania. Morocco. Portugal. Sierra Leone. Spain. United Kingdom (UK). Western Sahara.',0.0,84.0,-12.0,-6.0,0);
+INSERT INTO "extent" VALUES('EPSG','2056','World - N hemisphere - 12°W to 6°W - by country','Between 12°W and 6°W, northern hemisphere between equator and 84°N, onshore and offshore. Algeria. Côte D''Ivoire (Ivory Coast). Faroe Islands. Guinea. Ireland. Jan Mayen. Liberia, Mali. Mauritania. Morocco. Portugal. Sierra Leone. Spain. United Kingdom (UK). Western Sahara.',0.0,84.01,-12.01,-6.0,0);
 INSERT INTO "extent" VALUES('EPSG','2057','World - S hemisphere - 12°W to 6°W - by country','Between 12°W and 6°W, southern hemisphere between 80°S and equator, onshore and offshore.',-80.0,0.0,-12.0,-6.0,0);
 INSERT INTO "extent" VALUES('EPSG','2058','World - N hemisphere - 6°W to 0°W - by country','Between 6°W and 0°W, northern hemisphere between equator and 84°N, onshore and offshore. Algeria. Burkina Faso. Côte'' Ivoire (Ivory Coast). Faroe Islands - offshore. France. Ghana. Gibraltar. Ireland - offshore Irish Sea. Mali. Mauritania. Morocco. Spain. United Kingdom (UK).',0.0,84.0,-6.0,0.0,0);
 INSERT INTO "extent" VALUES('EPSG','2059','World - S hemisphere - 6°W to 0°W - by country','Between 6°W and 0°W, southern hemisphere between 80°S and equator, onshore and offshore.',-80.0,0.0,-6.0,0.0,0);
@@ -3579,7 +3579,7 @@ INSERT INTO "extent" VALUES('EPSG','4600','Spain - Canary Islands onshore east o
 INSERT INTO "extent" VALUES('EPSG','4601','Spain - Canary Islands western east of 18°W','Spain - Canary Islands onshore - El Hierro east of 18°W, La Gomera, La Palma and Tenerife.',27.58,28.9,-18.06,-16.08,0);
 INSERT INTO "extent" VALUES('EPSG','4602','Spain - Balearic Islands - Mallorca','Spain - Balearic Islands - Mallorca onshore.',39.07,40.02,2.23,3.55,0);
 INSERT INTO "extent" VALUES('EPSG','4603','Spain - Balearic Islands - Menorca','Spain - Balearic Islands - Menorca onshore.',39.75,40.15,3.73,4.39,0);
-INSERT INTO "extent" VALUES('EPSG','4604','Spain - Balearic Islands - Ibiza and Formentera','Spain - Balearic Islands - Ibiza and Formentera - onshore.',38.59,39.17,1.12,1.68,0);
+INSERT INTO "extent" VALUES('EPSG','4604','Spain - Balearic Islands - Ibiza','Spain - Balearic Islands - Ibiza - onshore.',38.77,39.17,1.12,1.68,0);
 INSERT INTO "extent" VALUES('EPSG','4605','Spain - mainland onshore and Ceuta','Spain - mainland and Ceuta - onshore.',35.82,43.82,-9.37,3.39,0);
 INSERT INTO "extent" VALUES('EPSG','4606','Europe - British Isles - UK and Ireland onshore, UKCS','United Kingdom (UK) - offshore to boundary of UKCS within 49°45''N to 61°N and 9°W to 2°E; onshore Great Britain (England, Wales and Scotland) and Northern Ireland. Ireland onshore. Isle of Man onshore.',49.75,61.01,-10.85,2.01,0);
 INSERT INTO "extent" VALUES('EPSG','4607','UK - Glasgow to Kilmarnock','United Kingdom (UK) - on or related to the rail route from Glasgow to Kilmarnock via Barrhead and the branch to East Kilbride.',55.55,55.95,-4.65,-4.05,0);
@@ -3666,8 +3666,16 @@ INSERT INTO "extent" VALUES('EPSG','4687','UK - Shrewsbury to Aberystwyth','Unit
 INSERT INTO "extent" VALUES('EPSG','4688','UK – Okehampton to Penstone','United Kingdom (UK) - on or related to the rail route from Okehampton to Penstone.',50.65,50.85,-4.1,-3.6,0);
 INSERT INTO "extent" VALUES('EPSG','4689','UK – Reading to Penzance','United Kingdom (UK) - on or related to the rail route from Reading via Newbury to Penzance.',50.05,51.7,-5.63,-0.85,0);
 INSERT INTO "extent" VALUES('EPSG','4690','UK - London to Fishguard','United Kingdom (UK) - on or related to the rail routes from London (Paddington) to Swansea; Swansea to Pembroke Dock, Milford Haven and Fishguard; and around Cardiff and the valleys.',51.25,52.06,-5.16,-0.1,0);
+INSERT INTO "extent" VALUES('EPSG','4691','Portugal - mainland - nearshore','Portugal - mainland - nearshore.',36.9,41.88,-9.57,-7.39,0);
+INSERT INTO "extent" VALUES('EPSG','4692','Portugal - mainland - nearshore - Tagus estuary','Portugal - mainland - nearshore - Tagus estuary.',38.58,38.96,-9.46,-8.92,0);
 INSERT INTO "extent" VALUES('EPSG','4693','Denmark - Copenhagen','Denmark - onshore - Copenhagen and surrounding area.',55.51,55.82,12.23,12.73,0);
 INSERT INTO "extent" VALUES('EPSG','4694','Denmark - northern Schleswig','Denmark - onshore northern Schleswig and surrounding islands (i.e. Jutland south of the pre-1920 border near the Kongea river).',54.8,55.47,8.37,10.16,0);
+INSERT INTO "extent" VALUES('EPSG','4695','Portugal - Madeira and Desertas islands - nearshore','Portugal - Madeira and Desertas islands - nearshore.',32.35,32.93,-17.33,-16.4,0);
+INSERT INTO "extent" VALUES('EPSG','4696','Portugal - Porto Santo island - nearshore','Portugal - Porto Santo island (Madeira archipelago)  - nearshore.',32.97,33.16,-16.46,-16.23,0);
+INSERT INTO "extent" VALUES('EPSG','4697','Portugal - Azores W - Flores, Corvo - nearshore','Portugal - western Azores - Flores and Corvo islands - nearshore.',39.32,39.78,-31.34,-31.01,0);
+INSERT INTO "extent" VALUES('EPSG','4698','Portugal - Azores C - Faial - nearshore','Portugal - central Azores - Faial island - nearshore.',38.46,38.7,-28.91,-28.53,0);
+INSERT INTO "extent" VALUES('EPSG','4699','Portugal - Azores C - Pico nearshore','Portugal - central Azores - Pico island - nearshore.',38.33,38.62,-28.61,-27.96,0);
+INSERT INTO "extent" VALUES('EPSG','4700','Portugal - Azores C - S Jorge - nearshore','Portugal - central Azores - Sao Jorge island - nearshore.',38.48,38.81,-28.39,-27.68,0);
 INSERT INTO "extent" VALUES('EPSG','4701','USA - Illinois - Carroll, Jo Daviess, Stephenson','United States (USA) - Illinois - counties of Carroll, Jo Daviess and Stephenson.',41.92,42.51,-90.66,-89.39,0);
 INSERT INTO "extent" VALUES('EPSG','4702','USA - Illinois - Lee, Ogle, Winnebago','United States (USA) - Illinois - counties of Lee, Ogle and Winnebago.',41.58,42.51,-89.69,-88.93,0);
 INSERT INTO "extent" VALUES('EPSG','4703','USA - Illinois - Boone, Dekalb, Kane, Kendall, McHenry','United States (USA) - Illinois - counties of Boone, Dekalb, Kane, Kendall and McHenry.',41.45,42.5,-88.95,-88.19,0);
@@ -3701,3 +3709,14 @@ INSERT INTO "extent" VALUES('EPSG','4730','USA - Illinois - Clinton, Jefferson, 
 INSERT INTO "extent" VALUES('EPSG','4731','USA - Illinois - Olney zone','United States (USA) - Illinois - counties of Clay, Edwards, Lawrence, Richland, Wabash and Wayne.',38.23,38.92,-88.71,-87.49,0);
 INSERT INTO "extent" VALUES('EPSG','4732','USA - Illinois - Carbondale zone','United States (USA) - Illinois - counties of Franklin, Gallatin, Hamilton, Jackson, Perry,  Randolph, Saline, White and Williamson.',37.56,38.26,-90.21,-87.91,0);
 INSERT INTO "extent" VALUES('EPSG','4733','USA - Illinois - Metropolis zone','United States (USA) - Illinois - counties of Alexander, Hardin, Johnson, Massac, Pope, Pulaski and Union.',36.97,37.61,-89.53,-88.06,0);
+INSERT INTO "extent" VALUES('EPSG','4734','Portugal - Azores C - Graciosa - nearshore','Portugal - central Azores - Graciosa island - nearshore.',38.95,39.15,-28.14,-27.88,0);
+INSERT INTO "extent" VALUES('EPSG','4735','Portugal - Azores C - Terceira - nearshore','Portugal - central Azores - Terceira island - nearshore.',38.58,38.86,-27.45,-26.97,0);
+INSERT INTO "extent" VALUES('EPSG','4736','Portugal - Azores E - S Miguel - nearshore','Portugal - eastern Azores - Sao Miguel island - nearshore.',37.65,37.97,-25.92,-25.07,0);
+INSERT INTO "extent" VALUES('EPSG','4737','Portugal - Azores E - Santa Maria and Formigas - nearshore','Portugal - eastern Azores - Santa Maria and  Formigas islands - nearshore.',36.87,37.33,-25.25,-24.71,0);
+INSERT INTO "extent" VALUES('EPSG','4738','Portugal - offshore','Portugal - offshore.',29.24,43.07,-35.58,-7.25,0);
+INSERT INTO "extent" VALUES('EPSG','4739','Spain - Balearic Islands - Formentera','Spain - Balearic Islands - Formentera - onshore.',38.59,38.86,1.31,1.65,0);
+INSERT INTO "extent" VALUES('EPSG','4740','Spain - Melilla','Spain - Melilla onshore.',35.26,35.38,-2.98,-2.88,0);
+INSERT INTO "extent" VALUES('EPSG','4741','Spain - Alboran','Spain - Alboran island - onshore.',35.88,36.0,-3.1,-2.96,0);
+INSERT INTO "extent" VALUES('EPSG','4742','Netherlands - offshore and nearshore ','Netherlands - offshore North Sea and nearshore.',51.32,55.77,2.53,7.21,0);
+INSERT INTO "extent" VALUES('EPSG','4743','UK - Coventry','United Kingdom (UK) - in and around the area of Coventry city centre and the route to Birmingham airport.',52.3,52.5,-1.85,-1.3,0);
+INSERT INTO "extent" VALUES('EPSG','4744','Europe - Brenner','Austria and Italy - on or related to the Brenner Base Tunnel rail route from Innsbruck to Fortezza (Franzensfeste).',46.45,47.33,11.04,11.91,0);
